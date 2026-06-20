@@ -24,7 +24,7 @@ hiii welcome to propeller child game
 #### nice to haves
 - [ ] object recycler script that reuses objects instead of constantly creating and destroying them
 
-# assets to make
+# visual assets to make
 - [ ] child
 - [ ] propeller hat(s) (could be attached to child in one file or separately?)
 - [ ] bird
@@ -37,3 +37,14 @@ hiii welcome to propeller child game
 - [ ] gun (not too realistic)
 - [ ] icons for upgrades
 - [ ] many more ui elements that i cannot think of yet
+
+# audio assets to ask nicely for
+- [ ] ask wife for music
+- [ ] button sfx
+- [ ] collect sfx (maybe different for each collectible)
+- [ ] maybe enemy sfxs? as they load into the screen
+- [ ] bird damaged sfx
+- [ ] child damaged sfx
+- [ ] propeller sfx (could just be a wind woosh)
+- [ ] gun sfx (i think itd be really funny for its collect sound to be a reload sound)
+- [ ] panic sfx for when decreasing velocity is a certain number?
