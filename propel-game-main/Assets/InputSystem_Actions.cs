@@ -72,9 +72,6 @@ using UnityEngine.InputSystem.Utilities;
 /// }
 /// </code>
 /// </example>
-/// 
-
-
 public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 {
     /// <summary>
