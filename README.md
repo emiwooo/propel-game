@@ -25,16 +25,16 @@ hiii welcome to propeller child game
 - [ ] object recycler script that reuses objects instead of constantly creating and destroying them
 
 # visual assets to make
-- [ ] child
-- [ ] propeller hat(s) (could be attached to child in one file or separately?)
-- [ ] bird
-- [ ] plane
-- [ ] small candy
-- [ ] large candy
-- [ ] heart (for health)
-- [ ] clouds?
-- [ ] a sun would be funny
-- [ ] gun (not too realistic)
+- [X] child
+- [X] propeller hat
+- [ ] propeller hat upgrades
+- [X] bird
+- [X] plane
+- [X] small candy
+- [X] large candy
+- [X] clouds?
+- [X] a sun
+- [X] gun (not too realistic)
 - [ ] icons for upgrades
 - [ ] many more ui elements that i cannot think of yet
 
