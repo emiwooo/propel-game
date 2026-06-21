@@ -166,14 +166,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 4
-    - m_Name: up
-      m_Id: 27475a63-062c-4ca0-8f99-e285f445085f
-      m_Path: 
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
     - m_Name: down
       m_Id: 0400141a-083f-4e03-a0d7-36a5944dfd2b
       m_Path: 
@@ -198,6 +190,40 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
+    m_Flags: 0
+  LookAction:
+    m_Name: Look
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f5914112-1fcb-4f7b-8cf3-e2ae84726dfe
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 69953468-6570-4247-b874-aa734a843119
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 0
+    m_Flags: 0
+  ThrustAction:
+    m_Name: Thrust
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: 532fbb01-644a-4688-bcf7-899a34b36729
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 292d2893-c550-4077-bcc0-2851327de3db
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust
+      m_Flags: 0
     m_Flags: 0
 --- !u!114 &227886566
 MonoBehaviour:
@@ -298,10 +324,11 @@ Transform:
   m_GameObject: {fileID: 227886564}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.71879, y: 0, z: -50.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 777599126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777599125
@@ -332,11 +359,11 @@ Transform:
   m_GameObject: {fileID: 777599125}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.09, y: 1, z: -74.62}
+  m_LocalPosition: {x: -0.52999973, y: 1, z: -136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 227886568}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &777599127
 MonoBehaviour:
@@ -654,8 +681,8 @@ Transform:
   m_GameObject: {fileID: 2012905134}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.78, y: -0, z: -45.54}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -9.899999, y: 0, z: 39.8}
+  m_LocalScale: {x: 12, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -665,6 +692,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1859852588}
-  - {fileID: 777599126}
   - {fileID: 227886568}
   - {fileID: 2012905136}
