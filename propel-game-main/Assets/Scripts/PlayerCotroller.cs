@@ -23,6 +23,7 @@ public class PlayerCotroller : MonoBehaviour
     public float thrustTracker = 0;
     public float lineTracker = 0;
     Vector2 cursorOffset = new Vector2(168f, 203f);
+    public int ammoCount = 5;
 
     
    
@@ -95,7 +96,7 @@ public class PlayerCotroller : MonoBehaviour
         transform.position = playerPosition + realAcceleration;
         playerVelocity = playerVelocity + playerAcceleration;
         playerVelocity.y = Math.Clamp(playerVelocity.y, -0.05f, +0.1f);
-        Debug.Log(playerCursor);
+        //Debug.Log(playerCursor);
         //Debug.Log(mouseOn);
         //Debug.Log(thrustAllow);
         
