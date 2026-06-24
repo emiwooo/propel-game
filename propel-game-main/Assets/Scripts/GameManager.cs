@@ -1,3 +1,4 @@
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     }
     public GameState CurrentState { get; private set; }
     public int maxAltitude = 0;
+    public InputAction PauseAction;
 
     [Header("Menu Panels")]
     [SerializeField] private GameObject mainMenuPanel;
@@ -41,32 +43,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PauseAction.WasPressedThisFrame())
+        {
+            if (CurrentState == GameState.Playing)
+                PauseGame();
+            else if (CurrentState == GameState.Paused)
+                ResumeGame();
+        }
     }
 
     void ChangeState(GameState newState)
     {
         CurrentState = newState;
-        
-        switch (newState)
-        {
-            case GameState.MainMenu:
-                Time.timeScale = 1f;
-                break;
-            case GameState.Playing:
-                Time.timeScale = 1f;
-                break;
-            case GameState.Paused:
-                Time.timeScale = 0f;
-                break;
-            case GameState.GameOver:
-                Time.timeScale = 0f;
-                break;
-            case GameState.Shop:
-                Time.timeScale = 0f;
-                break;
-        }
-
         UpdateUI(newState);
     }
     
@@ -107,8 +95,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (CurrentState == GameState.Playing)
-            ChangeState(GameState.Paused);
+        ChangeState(GameState.Paused);
     }
 
     public void ResumeGame()
@@ -130,6 +117,16 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         ChangeState(GameState.MainMenu);
+    }
+
+    void OnEnable()
+    {
+        PauseAction.Enable();
+    }
+
+    void OnDisable()
+    {
+        PauseAction.Disable();
     }
 
 }
