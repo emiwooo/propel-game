@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 227886567}
   - component: {fileID: 227886566}
   - component: {fileID: 227886565}
+  - component: {fileID: 227886569}
   m_Layer: 0
   m_Name: playerObject
   m_TagString: Untagged
@@ -218,16 +219,35 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 292d2893-c550-4077-bcc0-2851327de3db
-      m_Path: <Mouse>/leftButton
+      m_Path: <Keyboard>/space
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Thrust
       m_Flags: 0
     m_Flags: 0
+  ShootAction:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 42e5489a-1cbd-4cd7-b0dc-662afe77cc4b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e32f752f-dfca-48cb-9f25-6251a22c1973
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
+    m_Flags: 0
+  thrustOn: 0
   thrustAllow: 5
   mouseOn: 0
   thrustTracker: 0
+  lineTracker: 0
 --- !u!114 &227886566
 MonoBehaviour:
   m_ObjectHideFlags: 0
