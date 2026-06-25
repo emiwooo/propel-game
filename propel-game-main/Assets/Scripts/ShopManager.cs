@@ -29,7 +29,7 @@ public class ShopManager : MonoBehaviour
     public Dictionary<string, ShopItem> shopDatabase = new Dictionary<string, ShopItem>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         initialiseShop();
     }
@@ -50,7 +50,7 @@ public class ShopManager : MonoBehaviour
         shopDatabase.Add("Large Candy", new ShopItem("Large Candy", new List<int> { 200, 400, 600 }, "Increases duration of boost from large candy.", 0, null, null));
         shopDatabase.Add("Max Ammo", new ShopItem("Max Ammo", new List<int> { 500, 1000, 1500 }, "Increases amount of bullets in gun by 1.", 0, null, null));
         shopDatabase.Add("Pizzazz", new ShopItem("Pizzazz", new List<int> { 500, 1000, 1500 }, "Increases your pizzazz.", 0, null, null));
-        
+
     }
 
     public void PurchaseItem(string itemName)
