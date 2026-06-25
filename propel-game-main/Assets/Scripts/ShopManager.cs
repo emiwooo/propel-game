@@ -1,0 +1,79 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+[System.Serializable] 
+public struct ShopItem
+{
+    public string itemName;
+    public List<int> prices;
+    public string description;
+    public int levelPurchased;
+    public Sprite icon; 
+    public GameObject itemPrefab;
+    
+    public ShopItem(string name, List<int> priceList, string desc, int level, Sprite img, GameObject prefab)
+    {
+        itemName = name;
+        prices = priceList;
+        description = desc;
+        levelPurchased = level;
+        icon = img;
+        itemPrefab = prefab;
+    }
+
+}
+
+public class ShopManager : MonoBehaviour
+{
+    [System.NonSerialized] 
+    public Dictionary<string, ShopItem> shopDatabase = new Dictionary<string, ShopItem>();
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        initialiseShop();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void initialiseShop()
+    {
+        shopDatabase.Clear();
+        
+        // Add items to the shop database
+        shopDatabase.Add("Max Thrust", new ShopItem("Max Thrust", new List<int> { 100, 200, 300 }, "Increase maximum thrust.", 0, null, null));
+        shopDatabase.Add("Small Candy+", new ShopItem("Small Candy+", new List<int> { 100, 200, 300 }, "Increases amount of thrust regained from small candy.", 0, null, null));
+        shopDatabase.Add("Large Candy", new ShopItem("Large Candy", new List<int> { 200, 400, 600 }, "Increases duration of boost from large candy.", 0, null, null));
+        shopDatabase.Add("Max Ammo", new ShopItem("Max Ammo", new List<int> { 500, 1000, 1500 }, "Increases amount of bullets in gun by 1.", 0, null, null));
+        shopDatabase.Add("Pizzazz", new ShopItem("Pizzazz", new List<int> { 500, 1000, 1500 }, "Increases your pizzazz.", 0, null, null));
+        
+    }
+
+    public void PurchaseItem(string itemName)
+    {
+        if (shopDatabase.ContainsKey(itemName))
+        {
+            ShopItem item = shopDatabase[itemName];
+            int currentLevel = item.levelPurchased;
+            if (currentLevel < item.prices.Count)
+            {
+                int price = item.prices[currentLevel];
+                if (GameManager.Instance.money >= price)
+                {
+                    GameManager.Instance.money -= price;
+                    item.levelPurchased++;
+                    shopDatabase[itemName] = item; 
+                    Debug.Log($"Purchased {itemName} for {price}. New level: {item.levelPurchased}");
+                }
+                else
+                {
+                    Debug.Log($"Not enough money to purchase {itemName}");
+                }
+            }
+        }
+    }
+}

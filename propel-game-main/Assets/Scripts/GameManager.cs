@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject shopPanel;
 
+    [Header("Player Stats")]
+    public int money { get; set; } = 0;
+
     private void Awake()
     {
         // Singleton
