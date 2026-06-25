@@ -26,16 +26,15 @@ public class PlayerCotroller : MonoBehaviour
     public int ammoCount = 5;
     private LineRenderer lineRenderer;
 
-    
-   
-
-
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.startWidth = 1f;
+        lineRenderer.endWidth = 1f;
+        lineRenderer.startColor = Color.purple;
+        lineRenderer.endColor = Color.purple;
 
         MoveAction.Enable();
         LookAction.Enable();
@@ -49,87 +48,65 @@ public class PlayerCotroller : MonoBehaviour
     
     // Update is called once per frame
     void Update()
+{
+    if (GameManager.Instance.CurrentState != GameManager.GameState.Playing)
+        return;
+
+    float dt = Time.deltaTime;
+
+    // INPUT
+    Vector2 moveInput = MoveAction.ReadValue<Vector2>();
+
+    mouseOn = ShootAction.ReadValue<float>();
+    thrustOn = ThrustAction.ReadValue<float>();
+
+    // ACCELERATION
+    Vector2 acceleration = new Vector2(0f, -3f); // gravity
+
+    if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
     {
-        if (GameManager.Instance.CurrentState != GameManager.GameState.Playing)
-            return;
-
-        
-        Vector2 playerMovement = MoveAction.ReadValue<Vector2>()*0.3f;
-        Vector2 playerPosition = (Vector2)transform.position + playerMovement + playerVelocity;
-
-        mouseOn = ShootAction.ReadValue<float>();
-        thrustOn = ThrustAction.ReadValue<float>();
-        playerAcceleration = new Vector2(0.0f, -0.01f);
-        lineRenderer.startWidth = 30;
-        lineRenderer.startColor = Color.purple;
-        Vector2 lineOrigin = transform.position;
-        
-
-
-
-        if ((thrustOn == 1.0f) && (thrustAllow > 0) && (thrustTracker == 0))
-        {
-            playerAcceleration = new Vector2(0.0f, 5f);
-            thrustAllow -= 1;
-            thrustTracker = 1;
-            
-
-
-        }
-        else if (thrustOn == 0f)
-        {
-            thrustTracker = 0;
-            playerAcceleration = new Vector2(0.0f, -0.1f);
-
-        }
-        
-        if (mouseOn == 1.0f)
-        {
-            lineRenderer.enabled = true;
-
-            Vector2 mouseScreenPos = LookAction.ReadValue<Vector2>();
-
-            Vector3 mouseWorldPos =
-                Camera.main.ScreenToWorldPoint(
-                    new Vector3(mouseScreenPos.x, mouseScreenPos.y, 0)
-                );
-
-            mouseWorldPos.z = 0;
-
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, mouseWorldPos);
-            
-        } else
-        {
-            lineRenderer.enabled = false;
-        }
-
-        realAcceleration += playerAcceleration;
-        
-        realAcceleration.y = Math.Clamp(realAcceleration.y, -0.2f, 5f);
-
-
-
-
-        transform.position = playerPosition + realAcceleration;
-        playerVelocity = playerVelocity + playerAcceleration;
-        playerVelocity.y = Math.Clamp(playerVelocity.y, -0.05f, +0.1f);
-        //Debug.Log(playerCursor);
-        //Debug.Log(mouseOn);
-        //Debug.Log(thrustAllow);
-        
-        
-      
-       
-
-       
-   
-
-
-
-      
-        
+        acceleration.y = 6f; // thrust up
+        thrustAllow -= dt;
+        thrustTracker = 1;
     }
+    else if (thrustOn == 0f)
+    {
+        thrustTracker = 0;
+    }
+
+    // VELOCITY
+    playerVelocity += acceleration * dt;
+
+    playerVelocity.y = Mathf.Clamp(playerVelocity.y, -5f, 5f);
+
+    // MOVOE!!!
+    Vector3 movement =
+        new Vector3(moveInput.x, 0, 0) * 3f * dt;
+
+    transform.position += (Vector3)playerVelocity * dt + movement;
+
+    // LINE RENDERER
+    if (mouseOn == 1f)
+    {
+        lineRenderer.enabled = true;
+
+        Vector2 mouseScreenPos = LookAction.ReadValue<Vector2>();
+
+        Vector3 mouseWorldPos =
+            Camera.main.ScreenToWorldPoint(
+                new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z)
+            );
+
+        mouseWorldPos.z = 0;
+
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, mouseWorldPos);
+    }
+    else
+    {
+        lineRenderer.enabled = false;
+    }
+}
 
 
 };
