@@ -66,7 +66,7 @@ public class PlayerCotroller : MonoBehaviour
     if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
     {
         acceleration.y = 6f; // thrust up
-        thrustAllow -= dt;
+        thrustAllow -= 1;
         thrustTracker = 1;
     }
     else if (thrustOn == 0f)
@@ -106,6 +106,8 @@ public class PlayerCotroller : MonoBehaviour
     {
         lineRenderer.enabled = false;
     }
+
+        Debug.Log(thrustAllow);
 }
 
 
