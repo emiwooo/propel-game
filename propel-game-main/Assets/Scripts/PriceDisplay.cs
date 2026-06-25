@@ -10,7 +10,6 @@ public class PriceDisplay : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log(priceText);
         UpdatePriceText();
     }
 
@@ -22,8 +21,6 @@ public class PriceDisplay : MonoBehaviour
 
     public void UpdatePriceText()
     {
-        Debug.Log("Looking for: " + targetItemName);
-        Debug.Log("Contains: " + shopManager.shopDatabase.ContainsKey(targetItemName));
         if (shopManager.shopDatabase.ContainsKey(targetItemName))
         {
             ShopItem item = shopManager.shopDatabase[targetItemName];
