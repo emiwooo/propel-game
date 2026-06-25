@@ -6,8 +6,8 @@ using UnityEngine;
 public class CollectBehaviour : MonoBehaviour
 {
     public GameObject playerObject;
-    public Collider playerCollider;
-    public Collider collectCollider;
+    public Collider2D playerCollider;
+    public Collider2D collectCollider;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,13 +19,13 @@ public class CollectBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCollider = playerObject.GetComponent<Collider>();
+        playerCollider = playerObject.GetComponent<Collider2D>();
 
     }
 
-    void OnTriggerEnter(Collider playerCollider)
+    void OnTriggerStay2D(Collider2D other)
     {
-        //Debug.Log("Colliding!!!");
+        Debug.Log("Colliding!!!");
 
     }
 

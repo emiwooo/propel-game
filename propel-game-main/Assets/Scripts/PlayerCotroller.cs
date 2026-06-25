@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-using UnityEngine.Windows;
+
 
 
 public class PlayerCotroller : MonoBehaviour
@@ -65,7 +65,7 @@ public class PlayerCotroller : MonoBehaviour
 
     if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
     {
-        acceleration.y = 6f; // thrust up
+        acceleration.y = 5f; // thrust up
         thrustAllow -= 1;
         thrustTracker = 1;
     }
@@ -75,15 +75,15 @@ public class PlayerCotroller : MonoBehaviour
     }
 
     // VELOCITY
-    playerVelocity += acceleration * dt;
+    playerVelocity += acceleration;
 
-    playerVelocity.y = Mathf.Clamp(playerVelocity.y, -5f, 5f);
+    playerVelocity.y = Mathf.Clamp(playerVelocity.y, -0.1f, 10f);
 
     // MOVOE!!!
     Vector3 movement =
         new Vector3(moveInput.x, 0, 0) * 3f * dt;
 
-    transform.position += (Vector3)playerVelocity * dt + movement;
+    transform.position += (Vector3)playerVelocity + movement;
 
     // LINE RENDERER
     if (mouseOn == 1f)
@@ -107,7 +107,7 @@ public class PlayerCotroller : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
-        Debug.Log(thrustAllow);
+        
 }
 
 
