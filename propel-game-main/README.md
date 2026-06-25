@@ -4,24 +4,32 @@ hiii welcome to propeller child game
 
 # scripts to implement!!!
 - [ ] player info
-- [ ] game manager - keep game state here
+- [X] game manager - keep game state here
 - [ ] player controller
 
-- [ ] collectible (parent class for collectibles)
+- [ ] collectible (parent class for collectibles) 
 	- [ ] small candy - to fill thrust meter
 	- [ ] large candy - gives large speed boost + make player immune for short time
-	- [ ] health - maybe? depends how hard game is
 	- [ ] gun - shoots bullets to kill birds
 
 - [ ] enemy (parent class probably) - damage player when they collide
 	- [ ] bird - can be shot down by bullets
-	- [ ] plane ? idk 
+	- [ ] plane
 
  - [ ] level generator - procedurally instantiate collectibles and enemies
 
-- [ ] camera controller - follow player? 
+- [X] camera
+
+# ui to also implement
+- [ ] start
+- [ ] level HUD
+- [ ] pause
+- [ ] game over
+- [ ] shop
+- [ ] how to play
 
 #### nice to haves
+- [ ] volume bar
 - [ ] object recycler script that reuses objects instead of constantly creating and destroying them
 
 # visual assets to make
@@ -35,7 +43,8 @@ hiii welcome to propeller child game
 - [X] clouds?
 - [X] a sun
 - [X] gun (not too realistic)
-- [ ] icons for upgrades
+- [X] icons for upgrades
+- [ ] cover icon art
 - [ ] many more ui elements that i cannot think of yet
 
 # audio assets to ask nicely for
