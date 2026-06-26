@@ -12,12 +12,15 @@ public class CamerControls : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
 
-        camerY = playerScript.transTotal.y;
-        transform.position += new Vector3(0, camerY, 0);
+//        camerY = playerScript.transTotal.y;
+//        transform.position += new Vector3(0, camerY, 0);
         
+        Vector3 pos = transform.position;
+        pos.y = playerScript.transform.position.y;
+        transform.position = pos;
         
     }
 }
