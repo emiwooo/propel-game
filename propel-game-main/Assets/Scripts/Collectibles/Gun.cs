@@ -4,8 +4,7 @@ public class Gun : CollectBehaviour
 {
     protected override void Collect(PlayerCotroller player)
     {
-        // TODO: enable gun for player
-
+        player.hasGun = true;
         PlaySound(pickupSFX);
         Destroy(gameObject);
     }
