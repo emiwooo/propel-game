@@ -991,14 +991,17 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   thrustOn: 0
-  maxThrust: 5
-  thrustAllow: 5
+  maxThrust: 20
+  thrustAllow: 20
   mouseOn: 0
   thrustTracker: 0
   lineTracker: 0
   ammoCount: 5
   groundControl: {fileID: 1931178216}
   transTotal: {x: 0, y: 0, z: 0}
+  mouseScreenPos: {x: 0, y: 0}
+  bulletPrefab: {fileID: 0}
+  bulletRigid: {fileID: 0}
   currentHeight: 0
   currentMaxHeight: 0
 --- !u!114 &227886566
