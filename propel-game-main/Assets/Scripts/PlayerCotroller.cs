@@ -47,8 +47,8 @@ public class PlayerCotroller : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = 1f;
-        lineRenderer.endWidth = 1f;
+        lineRenderer.startWidth = 0.5f;
+        lineRenderer.endWidth = 0.5f;
         lineRenderer.startColor = Color.purple;
         lineRenderer.endColor = Color.purple;
 

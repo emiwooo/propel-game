@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
         {
             highestAltitude = playerController.currentHeight;
         }
+        money += (int)playerController.currentHeight/10;
         ChangeState(GameState.GameOver);
     }
 
