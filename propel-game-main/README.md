@@ -22,10 +22,10 @@ hiii welcome to propeller child game
 
 # ui to also implement
 - [ ] start
-- [ ] level HUD
-- [ ] pause
-- [ ] game over
-- [ ] shop
+- [X] level HUD
+- [X] pause
+- [X] game over
+- [X] shop
 - [ ] how to play
 
 #### nice to haves
@@ -49,11 +49,13 @@ hiii welcome to propeller child game
 
 # audio assets to ask nicely for
 - [ ] ask wife for music
-- [ ] button sfx
-- [ ] collect sfx (maybe different for each collectible)
+- [X] button sfx
+- [X] collect sfx small candy
+- [X] collect sfx big candy (powerup sound)
 - [ ] maybe enemy sfxs? as they load into the screen
 - [ ] bird damaged sfx
 - [ ] child damaged sfx
-- [ ] propeller sfx (could just be a wind woosh)
-- [ ] gun sfx (i think itd be really funny for its collect sound to be a reload sound)
+- [X] propeller sfx (could just be a wind woosh)
+- [X] gun shoot sfx
+- [X] gun pickup sfx
 - [ ] panic sfx for when decreasing velocity is a certain number?
