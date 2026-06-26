@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public PlayerCotroller playerController;
+    public CamerControls camerControls;
     public enum GameState
     {
         MainMenu,
@@ -13,7 +15,7 @@ public class GameManager : MonoBehaviour
         Shop
     }
     public GameState CurrentState { get; private set; }
-    public int maxAltitude = 0;
+    public float highestAltitude = 0;
     public InputAction PauseAction;
 
     [Header("Menu Panels")]
@@ -91,8 +93,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public void StartGame()
     {
+        // need to reset state of player
+        playerController.resetPlayerState();
         ChangeState(GameState.Playing);
     }
 
@@ -109,6 +114,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (playerController.currentHeight > highestAltitude)
+        {
+            highestAltitude = playerController.currentHeight;
+        }
         ChangeState(GameState.GameOver);
     }
 
