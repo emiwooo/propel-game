@@ -1,0 +1,8 @@
+reload https://freesound.org/people/PercyFrench/sounds/652632/
+gun zap https://freesound.org/people/jonccox/sounds/175270/
+droplet_good5 https://freesound.org/people/willy_ineedthatapp_com/sounds/167346/
+energy 1 https://freesound.org/people/Leszek_Szary/sounds/751556/
+splat2 https://freesound.org/people/gprosser/sounds/361030/
+bird https://freesound.org/people/Lunevix/sounds/581314/
+whip https://freesound.org/people/Eelke/sounds/593660/
+button https://freesound.org/people/DasDeer/sounds/161544/
