@@ -35,6 +35,9 @@ public class PlayerCotroller : MonoBehaviour
     private LineRenderer lineRenderer;
     public Ground groundControl;
     public Vector3 transTotal;
+    public Vector2 mouseScreenPos;
+    public GameObject bulletPrefab;
+    public Rigidbody2D bulletRigid;
 
     // keep track of max altitude reached
     public float currentHeight = 0;
@@ -119,8 +122,11 @@ public class PlayerCotroller : MonoBehaviour
             lineRenderer.enabled = true;
 
             Vector2 mouseScreenPos = LookAction.ReadValue<Vector2>();
-
-            Vector3 mouseWorldPos =
+            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bulletRigid = bulletPrefab.GetComponent<Rigidbody2D>();
+            
+            Debug.Log(bulletRigid.linearVelocity);
+        Vector3 mouseWorldPos =
                 Camera.main.ScreenToWorldPoint(
                     new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z)
                 );
