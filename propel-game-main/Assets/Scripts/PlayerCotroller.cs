@@ -23,8 +23,8 @@ public class PlayerCotroller : MonoBehaviour
 
     // thrust
     public float thrustOn = 0f;
-    public float maxThrust = 5f; // can be upgraded in shop
-    public float thrustAllow = 5;
+    public float maxThrust = 20f; // can be upgraded in shop
+    public float thrustAllow = 20f;
 
 
     public float mouseOn = 0;
@@ -83,11 +83,11 @@ public class PlayerCotroller : MonoBehaviour
         thrustOn = ThrustAction.ReadValue<float>();
 
         // ACCELERATION
-        Vector2 acceleration = new Vector2(0f, -0.001f); // gravity
+        Vector2 acceleration = new Vector2(0f, -0.003f); // gravity
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
         {
-            acceleration.y = 0.3f; // thrust up
+            acceleration.y = 0.2f; // thrust up
             thrustAllow -= 1;
             thrustTracker = 1;
         }
@@ -100,7 +100,7 @@ public class PlayerCotroller : MonoBehaviour
         playerVelocity += acceleration;
         
 
-        playerVelocity.y = Mathf.Clamp(playerVelocity.y, -3f, 10f);
+        playerVelocity.y = Mathf.Clamp(playerVelocity.y, -3f, 0.5f);
             
             // MOVOE!!!
             Vector3 movement =
@@ -108,7 +108,7 @@ public class PlayerCotroller : MonoBehaviour
         
         if (groundControl.playerY == 0f)
             {
-                playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 10f);
+                playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 0.5f);
                 
             }
         
@@ -148,6 +148,7 @@ public class PlayerCotroller : MonoBehaviour
         }
         //Debug.Log("Current Height: " + currentHeight);
 
+        Debug.Log(thrustAllow);
 
         // for testing
         if (thrustAllow == 0)
