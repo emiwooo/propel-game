@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public PlayerCotroller playerController;
     public CamerControls camerControls;
+    public LevelGenerator levelGenerator;
     public enum GameState
     {
         MainMenu,
@@ -98,6 +99,7 @@ public class GameManager : MonoBehaviour
     {
         // need to reset state of player
         playerController.resetPlayerState();
+        levelGenerator.ResetAndGenerate();
         ChangeState(GameState.Playing);
     }
 

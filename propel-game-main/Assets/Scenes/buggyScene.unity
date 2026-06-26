@@ -4549,6 +4549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerController: {fileID: 227886565}
   camerControls: {fileID: 777599130}
+  levelGenerator: {fileID: 1639456255}
   highestAltitude: 0
   PauseAction:
     m_Name: Pause
@@ -5519,6 +5520,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575067317}
   m_CullTransparentMesh: 1
+--- !u!1 &1639456254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1639456256}
+  - component: {fileID: 1639456255}
+  m_Layer: 0
+  m_Name: _LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1639456255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639456254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c4353b48658bd48ac9e1611cf13ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
+  mainCamera: {fileID: 777599129}
+  player: {fileID: 227886565}
+  enemyPrefabs:
+  - {fileID: 2443764280835639085, guid: 1b63bb23a10a09649bf9bc9df7b2825d, type: 3}
+  - {fileID: 2345991647322143132, guid: 76961adf8c408ea42950c2d32bc2abac, type: 3}
+  cloudPrefabs:
+  - {fileID: 5042286516444123584, guid: 75b353efac2336f4fa1ecab55cc326b9, type: 3}
+  - {fileID: 1702022470255776356, guid: 6be8be96b4e08474fb5e9e643cdc04ca, type: 3}
+  - {fileID: 1865912276271625808, guid: b92cfee534ffd8941a3c23d25566cf67, type: 3}
+  - {fileID: 1968440646934726919, guid: 8be9a665789551741917d34ac955f519, type: 3}
+  bandHeight: 25
+  lookAheadDistance: 15
+  despawnBehindDistance: 10
+  enemiesPerBand: {x: 1, y: 3}
+  enemyEdgePadding: 0.5
+  minEnemySpacing: 2.5
+  cloudsPerBand: {x: 2, y: 4}
+  cloudOverflow: 2
+  minCloudSpacing: 1.5
+  smallCandyPrefabs:
+  - {fileID: 1831348238500030312, guid: 9a3ef70e5869bbd4e9ae990550d8ca6b, type: 3}
+  bigCandyPrefabs:
+  - {fileID: 3089872210803493868, guid: 926d7006d1c6fb44db1161915f80e6da, type: 3}
+  gunPrefabs:
+  - {fileID: 754934270600475655, guid: 600d0389d7358de46b71adf8b22a90c6, type: 3}
+  collectiblesPerBand: {x: 1, y: 2}
+  collectibleEdgePadding: 0.5
+  minCollectibleSpacing: 2
+  smallCandyWeight: 0.6
+  bigCandyWeight: 0.3
+  gunWeight: 0.1
+  playerSpawnClearRadius: 50
+--- !u!4 &1639456256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639456254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.06531, y: 0.28533, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1641814714
 GameObject:
   m_ObjectHideFlags: 0
@@ -8066,6 +8143,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1165312374}
   - {fileID: 1137090951}
+  - {fileID: 1639456256}
   - {fileID: 1931178215}
   - {fileID: 1859852588}
   - {fileID: 227886568}
