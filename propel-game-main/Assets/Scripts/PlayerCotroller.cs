@@ -19,8 +19,13 @@ public class PlayerCotroller : MonoBehaviour
     public InputAction LookAction;
     public InputAction ThrustAction;
     public InputAction ShootAction;
+
+    // thrust
     public float thrustOn = 0f;
+    public float maxThrust = 5f; // can be upgraded in shop
     public float thrustAllow = 5;
+
+
     public float mouseOn = 0;
     public float thrustTracker = 0;
     public float lineTracker = 0;
@@ -29,6 +34,10 @@ public class PlayerCotroller : MonoBehaviour
     private LineRenderer lineRenderer;
     public Ground groundControl;
     public Vector3 transTotal;
+
+    // keep track of max altitude reached
+    public float currentHeight = 0;
+    public float currentMaxHeight = 0; // for this run specifically
     
     
 
@@ -124,7 +133,20 @@ public class PlayerCotroller : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
+    currentHeight = transform.position.y; // for ui
+    if (currentHeight > currentMaxHeight)
+    {
+        currentMaxHeight = currentHeight;
+    }
+    //Debug.Log("Current Height: " + currentHeight);
+
         
+}
+
+// for thrust bar ui
+public float ThrustPercent
+{
+    get { return thrustAllow / maxThrust; }
 }
 
 
