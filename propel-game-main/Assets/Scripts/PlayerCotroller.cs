@@ -165,7 +165,15 @@ public class PlayerCotroller : MonoBehaviour
     {
         get { return thrustAllow / maxThrust; }
     }
-
+    
+    public void TakeDamage(int damage)
+    {
+        thrustAllow -= damage;
+        if (thrustAllow < 0)
+        {
+            thrustAllow = 0;
+        }
+    }
 
 };
 
