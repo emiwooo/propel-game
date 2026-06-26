@@ -5582,7 +5582,7 @@ MonoBehaviour:
   smallCandyPrefabs:
   - {fileID: 1831348238500030312, guid: 9a3ef70e5869bbd4e9ae990550d8ca6b, type: 3}
   bigCandyPrefabs:
-  - {fileID: 3089872210803493868, guid: 926d7006d1c6fb44db1161915f80e6da, type: 3}
+  - {fileID: 4078985812599326765, guid: 926d7006d1c6fb44db1161915f80e6da, type: 3}
   gunPrefabs:
   - {fileID: 754934270600475655, guid: 600d0389d7358de46b71adf8b22a90c6, type: 3}
   collectiblesPerBand: {x: 1, y: 2}
