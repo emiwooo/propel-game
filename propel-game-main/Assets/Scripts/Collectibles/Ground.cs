@@ -33,7 +33,7 @@ public class Ground : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Colliding!!!");
+        //Debug.Log("Colliding!!!");
         playerY = 0;
         
          
