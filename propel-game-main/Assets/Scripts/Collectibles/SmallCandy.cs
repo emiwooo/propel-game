@@ -12,7 +12,7 @@ public class SmallCandy : CollectBehaviour
     protected override void Collect(PlayerCotroller player)
     {
         // Increase the player's thrust allowance by 1
-        player.thrustAllow += 1;
+        player.SmallCandyCollected();
 
         PlaySound(pickupSFX);
         Destroy(gameObject);

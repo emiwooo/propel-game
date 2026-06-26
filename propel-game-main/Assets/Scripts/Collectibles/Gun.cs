@@ -4,7 +4,7 @@ public class Gun : CollectBehaviour
 {
     protected override void Collect(PlayerCotroller player)
     {
-        player.hasGun = true;
+        player.GunCollected();
         PlaySound(pickupSFX);
         Destroy(gameObject);
     }

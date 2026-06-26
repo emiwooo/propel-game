@@ -8,17 +8,15 @@ public struct ShopItem
     public List<int> prices;
     public string description;
     public int levelPurchased;
-    public Sprite icon; 
-    public GameObject itemPrefab;
+    public Sprite icon;
     
-    public ShopItem(string name, List<int> priceList, string desc, int level, Sprite img, GameObject prefab)
+    public ShopItem(string name, List<int> priceList, string desc, int level, Sprite img)
     {
         itemName = name;
         prices = priceList;
         description = desc;
         levelPurchased = level;
         icon = img;
-        itemPrefab = prefab;
     }
 
 }
@@ -27,6 +25,7 @@ public class ShopManager : MonoBehaviour
 {
     [System.NonSerialized] 
     public Dictionary<string, ShopItem> shopDatabase = new Dictionary<string, ShopItem>();
+    public PlayerCotroller player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -45,11 +44,11 @@ public class ShopManager : MonoBehaviour
         shopDatabase.Clear();
         
         // Add items to the shop database
-        shopDatabase.Add("Max Thrust", new ShopItem("Max Thrust", new List<int> { 100, 200, 300 }, "Increase maximum thrust.", 0, null, null));
-        shopDatabase.Add("Small Candy", new ShopItem("Small Candy+", new List<int> { 100, 200, 300 }, "Increases amount of thrust regained from small candy.", 0, null, null));
-        shopDatabase.Add("Large Candy", new ShopItem("Large Candy", new List<int> { 200, 400, 600 }, "Increases duration of boost from large candy.", 0, null, null));
-        shopDatabase.Add("Max Ammo", new ShopItem("Max Ammo", new List<int> { 500, 1000, 1500 }, "Increases amount of bullets in gun by 1.", 0, null, null));
-        shopDatabase.Add("Pizzazz", new ShopItem("Pizzazz", new List<int> { 500, 1000, 1500 }, "Increases your pizzazz.", 0, null, null));
+        shopDatabase.Add("Max Thrust", new ShopItem("Max Thrust", new List<int> { 100, 200, 300 }, "Increase maximum thrust.", 0, null));
+        shopDatabase.Add("Small Candy", new ShopItem("Small Candy+", new List<int> { 100, 200, 300 }, "Increases amount of thrust regained from small candy.", 0, null));
+        shopDatabase.Add("Large Candy", new ShopItem("Large Candy", new List<int> { 200, 400, 600 }, "Increases duration of boost from large candy.", 0, null));
+        shopDatabase.Add("Max Ammo", new ShopItem("Max Ammo", new List<int> { 500, 1000, 1500 }, "Increases amount of bullets in gun by 1.", 0, null));
+        shopDatabase.Add("Pizzazz", new ShopItem("Pizzazz", new List<int> { 500, 1000, 1500 }, "Increases your pizzazz.", 0, null));
 
     }
 
@@ -67,6 +66,7 @@ public class ShopManager : MonoBehaviour
                     GameManager.Instance.money -= price;
                     item.levelPurchased++;
                     shopDatabase[itemName] = item; 
+                    player.ApplyShopUpgrades(this);
                     Debug.Log($"Purchased {itemName} for {price}. New level: {item.levelPurchased}");
                 }
                 else

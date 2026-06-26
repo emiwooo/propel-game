@@ -43,8 +43,12 @@ public class PlayerCotroller : MonoBehaviour
     public float currentHeight = 0;
     public float currentMaxHeight = 0; // for this run specifically
 
+    // small candy 
+    public int smallCandyThrust = 1; // can be upgraded in shop
+
     // gun
     public bool hasGun = false;
+    public int maxAmmo = 5; // can be upgraded in shop
     public int ammoCount = 5;
 
     // boost
@@ -87,7 +91,7 @@ public class PlayerCotroller : MonoBehaviour
         float dt = Time.deltaTime;
 
         // BOOST
-        if (boostActive)
+        if (hasBoost)
         {
             boostTimer -= dt;
 
@@ -97,7 +101,7 @@ public class PlayerCotroller : MonoBehaviour
 
             if (boostTimer <= 0f)
             {
-                boostActive = false;
+                hasBoost = false;
             }
         }
 
@@ -201,7 +205,7 @@ public class PlayerCotroller : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        if (boostActive)
+        if (hasBoost)
         {
             // If boost is active, ignore damage
             return;
@@ -215,8 +219,35 @@ public class PlayerCotroller : MonoBehaviour
     }
     public void ActivateBoost()
     {
-        boostActive = true;
+        hasBoost = true;
         boostTimer = boostDuration;
+    }
+
+    public void SmallCandyCollected()
+    {
+        thrustAllow += smallCandyThrust;
+        thrustAllow = Mathf.Min(thrustAllow, maxThrust); // Ensure thrust does not exceed maxThrust
+    }
+
+    public void GunCollected()
+    {
+        hasGun = true;
+        ammoCount = maxAmmo; 
+    }
+
+    public void ApplyShopUpgrades(ShopManager shop)
+    {
+        maxThrust = 5 + shop.shopDatabase["Max Thrust"].levelPurchased;
+
+        smallCandyThrust = 1 + shop.shopDatabase["Small Candy"].levelPurchased;
+
+        boostDuration = 1f + 0.5f * shop.shopDatabase["Large Candy"].levelPurchased;
+
+        maxAmmo = 5 + shop.shopDatabase["Max Ammo"].levelPurchased;
+
+        // Keep current values within the new limits
+        thrustAllow = Mathf.Min(thrustAllow, maxThrust);
+        ammoCount = Mathf.Min(ammoCount, maxAmmo);
     }
 
 };
