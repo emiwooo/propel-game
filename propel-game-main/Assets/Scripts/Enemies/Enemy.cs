@@ -5,6 +5,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Movement")]
     [SerializeField] protected float speed = 3f; // horizontal speed
     [SerializeField] protected float range = 5f; // horizontal range
+    public float Range => range; // to get it easily
 
     private float startX; // initial x position of the enemy
     private int direction = 1; // direction of movement (1 for right, -1 for left)

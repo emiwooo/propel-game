@@ -22,8 +22,9 @@ public class GameOverDisplay : MonoBehaviour
 
     private void UpdateText()
     {
-        altitudeText.text = playerController.currentHeight.ToString("F0") + "m";
+        float altitude = playerController.currentHeight;
+        altitudeText.text = altitude.ToString("F0") + "m";
         highestAltitudeText.text = "Highest Record\n" + GameManager.Instance.highestAltitude.ToString("F0") + "m";
-        moneyText.text = "You gained $" + GameManager.Instance.money.ToString("F0") + "!";
+        moneyText.text = "You gained $" + (int)(playerController.currentHeight / 10) + "!";
     }
 }
