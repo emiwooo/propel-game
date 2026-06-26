@@ -4,8 +4,7 @@ public class LargeCandy : CollectBehaviour
 {
     protected override void Collect(PlayerCotroller player)
     {
-        // TODO: add BOOST
-
+        player.ActivateBoost();
         PlaySound(pickupSFX);
         Destroy(gameObject);
     }

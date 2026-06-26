@@ -31,7 +31,7 @@ public class PlayerCotroller : MonoBehaviour
     public float thrustTracker = 0;
     public float lineTracker = 0;
     //Vector2 cursorOffset = new Vector2(168f, 203f);
-    public int ammoCount = 5;
+
     private LineRenderer lineRenderer;
     public Ground groundControl;
     public Vector3 transTotal;
@@ -42,6 +42,20 @@ public class PlayerCotroller : MonoBehaviour
     // keep track of max altitude reached
     public float currentHeight = 0;
     public float currentMaxHeight = 0; // for this run specifically
+
+    // small candy 
+    public int smallCandyThrust = 1; // can be upgraded in shop
+
+    // gun
+    public bool hasGun = false;
+    public int maxAmmo = 5; // can be upgraded in shop
+    public int ammoCount = 5;
+
+    // boost
+    public bool hasBoost = false;
+    public float boostDuration = 1f; // 1 sec
+    public float boostTimer = 0f;
+    public float boostRegenRate = 2f; // i.e. 2 thurst per sec
     
     
 
@@ -75,6 +89,21 @@ public class PlayerCotroller : MonoBehaviour
             return;
 
         float dt = Time.deltaTime;
+
+        // BOOST
+        if (hasBoost)
+        {
+            boostTimer -= dt;
+
+            // Regenerate thrust while boosting
+            thrustAllow += boostRegenRate * dt;
+            thrustAllow = Mathf.Min(thrustAllow, maxThrust);
+
+            if (boostTimer <= 0f)
+            {
+                hasBoost = false;
+            }
+        }
 
         // INPUT
         Vector2 moveInput = MoveAction.ReadValue<Vector2>();
@@ -177,11 +206,49 @@ public class PlayerCotroller : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
+        if (hasBoost)
+        {
+            // If boost is active, ignore damage
+            return;
+        }
+
         thrustAllow -= damage;
         if (thrustAllow < 0)
         {
             thrustAllow = 0;
         }
+    }
+    public void ActivateBoost()
+    {
+        hasBoost = true;
+        boostTimer = boostDuration;
+    }
+
+    public void SmallCandyCollected()
+    {
+        thrustAllow += smallCandyThrust;
+        thrustAllow = Mathf.Min(thrustAllow, maxThrust); // Ensure thrust does not exceed maxThrust
+    }
+
+    public void GunCollected()
+    {
+        hasGun = true;
+        ammoCount = maxAmmo; 
+    }
+
+    public void ApplyShopUpgrades(ShopManager shop)
+    {
+        maxThrust = 5 + shop.shopDatabase["Max Thrust"].levelPurchased;
+
+        smallCandyThrust = 1 + shop.shopDatabase["Small Candy"].levelPurchased;
+
+        boostDuration = 1f + 0.5f * shop.shopDatabase["Large Candy"].levelPurchased;
+
+        maxAmmo = 5 + shop.shopDatabase["Max Ammo"].levelPurchased;
+
+        // Keep current values within the new limits
+        thrustAllow = Mathf.Min(thrustAllow, maxThrust);
+        ammoCount = Mathf.Min(ammoCount, maxAmmo);
     }
 
 };

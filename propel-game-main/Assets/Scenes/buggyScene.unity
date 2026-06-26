@@ -996,7 +996,6 @@ MonoBehaviour:
   mouseOn: 0
   thrustTracker: 0
   lineTracker: 0
-  ammoCount: 5
   groundControl: {fileID: 1931178216}
   transTotal: {x: 0, y: 0, z: 0}
   mouseScreenPos: {x: 0, y: 0}
@@ -1004,6 +1003,14 @@ MonoBehaviour:
   bulletRigid: {fileID: 0}
   currentHeight: 0
   currentMaxHeight: 0
+  smallCandyThrust: 1
+  hasGun: 0
+  maxAmmo: 5
+  ammoCount: 5
+  hasBoost: 0
+  boostDuration: 1
+  boostTimer: 0
+  boostRegenRate: 2
 --- !u!114 &227886566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4329,6 +4336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b33fa692567714a923ce4a8f679469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  player: {fileID: 227886565}
 --- !u!4 &1137090951
 Transform:
   m_ObjectHideFlags: 0
