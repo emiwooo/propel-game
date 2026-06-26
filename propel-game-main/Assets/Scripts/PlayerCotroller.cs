@@ -1,8 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 
@@ -10,7 +12,7 @@ using UnityEngine.UIElements;
 public class PlayerCotroller : MonoBehaviour
 {
 
-    Vector2 playerVelocity = new Vector2(0.0f, 0.0f);
+    public Vector2 playerVelocity = new Vector2(0.0f, 0.0f);
     Vector2 playerAcceleration = new Vector2(0.0f, -0.1f);
     Vector2 realAcceleration = new Vector2(0.0f, 0.0f);
     public InputAction MoveAction;
@@ -25,6 +27,10 @@ public class PlayerCotroller : MonoBehaviour
     //Vector2 cursorOffset = new Vector2(168f, 203f);
     public int ammoCount = 5;
     private LineRenderer lineRenderer;
+    public Ground groundControl;
+    public Vector3 transTotal;
+    
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,6 +48,9 @@ public class PlayerCotroller : MonoBehaviour
         ShootAction.Enable();
 
         lineRenderer.enabled = false;
+        
+
+
 
     }
 
@@ -61,11 +70,11 @@ public class PlayerCotroller : MonoBehaviour
     thrustOn = ThrustAction.ReadValue<float>();
 
     // ACCELERATION
-    Vector2 acceleration = new Vector2(0f, -3f); // gravity
+    Vector2 acceleration = new Vector2(0f, -0.001f); // gravity
 
     if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
     {
-        acceleration.y = 5f; // thrust up
+        acceleration.y = 0.3f; // thrust up
         thrustAllow -= 1;
         thrustTracker = 1;
     }
@@ -76,14 +85,22 @@ public class PlayerCotroller : MonoBehaviour
 
     // VELOCITY
     playerVelocity += acceleration;
+    
+    
 
-    playerVelocity.y = Mathf.Clamp(playerVelocity.y, -0.1f, 10f);
-
-    // MOVOE!!!
-    Vector3 movement =
+    playerVelocity.y = Mathf.Clamp(playerVelocity.y, -3f, 10f);
+        
+        // MOVOE!!!
+        Vector3 movement =
         new Vector3(moveInput.x, 0, 0) * 3f * dt;
 
-    transform.position += (Vector3)playerVelocity + movement;
+    if (groundControl.playerY == 0f)
+        {
+            playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 10f);
+        }
+     
+     transTotal = (Vector3)playerVelocity + movement;
+     transform.position += (Vector3)playerVelocity + movement;
 
     // LINE RENDERER
     if (mouseOn == 1f)
