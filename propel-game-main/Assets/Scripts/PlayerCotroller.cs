@@ -115,11 +115,11 @@ public class PlayerCotroller : MonoBehaviour
         thrustOn = ThrustAction.ReadValue<float>();
 
         // ACCELERATION
-        Vector2 acceleration = new Vector2(0f, -0.003f); // gravity
+        Vector2 acceleration = new Vector2(0f, -0.0005f); // gravity
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
         {
-            acceleration.y = 0.2f; // thrust up
+            acceleration.y = 0.1f; // thrust up
             thrustAllow -= 1;
             thrustTracker = 1;
         }
