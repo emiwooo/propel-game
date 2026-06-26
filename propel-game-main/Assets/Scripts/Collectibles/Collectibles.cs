@@ -3,12 +3,10 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class CollectBehaviour : MonoBehaviour
+public abstract class CollectBehaviour : MonoBehaviour
 {
-    public GameObject playerObject;
-    public Collider2D playerCollider;
-    public Collider2D collectCollider;
-    
+    [SerializeField] public AudioClip pickupSFX;
+    [SerializeField] [Range(0f, 1f)] private float sfxVolume = 0.8f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,14 +17,30 @@ public class CollectBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCollider = playerObject.GetComponent<Collider2D>();
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Colliding!!!");
-
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerCotroller player = collision.gameObject.GetComponent<PlayerCotroller>();
+            if (player != null)
+            {
+                Collect(player);
+            }
+            Debug.Log("Player collided with collectible: " + gameObject.name);
+        }
     }
+
+    protected void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            AudioSource.PlayClipAtPoint(clip, transform.position, sfxVolume);
+        }
+    }
+
+    protected abstract void Collect(PlayerCotroller player);
 
 }
