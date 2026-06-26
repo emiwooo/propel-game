@@ -50,6 +50,9 @@ TagManager:
   - name: Player
     uniqueID: 552143631
     locked: 0
+  - name: TippyTop
+    uniqueID: 1217868599
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         playerController.resetPlayerState();
         levelGenerator.ResetAndGenerate();
         ChangeState(GameState.Playing);
+        playerController.BurstConfetti();
     }
 
     public void PauseGame()

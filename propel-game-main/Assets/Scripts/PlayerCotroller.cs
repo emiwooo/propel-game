@@ -11,6 +11,8 @@ using UnityEngine.UIElements;
 
 public class PlayerCotroller : MonoBehaviour
 {
+    
+    public ParticleSystem confettiParticleSystem;
     public Vector3 spawnPosition = Vector3.zero;
 
     public Vector2 playerVelocity = new Vector2(0.0f, 0.0f);
@@ -31,6 +33,7 @@ public class PlayerCotroller : MonoBehaviour
     public float thrustTracker = 0;
     public float lineTracker = 0;
     //Vector2 cursorOffset = new Vector2(168f, 203f);
+    public bool pizzazzPurchased = false;
 
     private LineRenderer lineRenderer;
     public Ground groundControl;
@@ -180,7 +183,7 @@ public class PlayerCotroller : MonoBehaviour
         Debug.Log(thrustAllow);
 
         // for testing
-        if (thrustAllow == 0)
+        if (thrustAllow <= 0)
         {
             GameManager.Instance.GameOver();
         }
@@ -246,10 +249,21 @@ public class PlayerCotroller : MonoBehaviour
 
         maxAmmo = 5 + shop.shopDatabase["Max Ammo"].levelPurchased;
 
+        pizzazzPurchased = shop.shopDatabase["Pizzazz"].levelPurchased > 0;
+
         // Keep current values within the new limits
         thrustAllow = Mathf.Min(thrustAllow, maxThrust);
         ammoCount = Mathf.Min(ammoCount, maxAmmo);
     }
+
+        public void BurstConfetti()
+    {
+        if (confettiParticleSystem != null && pizzazzPurchased)
+        {
+            confettiParticleSystem.Play();
+        }
+    }
+
 
 };
 
