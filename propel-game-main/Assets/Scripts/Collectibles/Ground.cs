@@ -24,7 +24,7 @@ public class Ground : MonoBehaviour
     void Update()
     {
         playerCollider = playerObject.GetComponent<Collider2D>();
-        playerY = 1;
+        
         
 
 
@@ -41,6 +41,10 @@ public class Ground : MonoBehaviour
         
         
         
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        playerY = 1;  
     }
 
 }

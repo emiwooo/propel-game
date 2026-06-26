@@ -102,14 +102,16 @@ public class PlayerCotroller : MonoBehaviour
             // MOVOE!!!
             Vector3 movement =
             new Vector3(moveInput.x, 0, 0) * 3f * dt;
-
+        
         if (groundControl.playerY == 0f)
             {
                 playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 10f);
+                
             }
         
         transTotal = (Vector3)playerVelocity + movement;
         transform.position += (Vector3)playerVelocity + movement;
+        
 
         // LINE RENDERER
         if (mouseOn == 1f)
