@@ -1003,6 +1003,7 @@ MonoBehaviour:
   transTotal: {x: 0, y: 0, z: 0}
   mouseScreenPos: {x: 0, y: 0}
   bulletPrefab: {fileID: 1513417479154052079, guid: 6990df27ef14cce4ca7e864186c08235, type: 3}
+  bulletSpeed: 15
   currentHeight: 0
   currentMaxHeight: 0
   smallCandyThrust: 1
@@ -10617,10 +10618,10 @@ MonoBehaviour:
   - {fileID: 754934270600475655, guid: 600d0389d7358de46b71adf8b22a90c6, type: 3}
   collectiblesPerBand: {x: 1, y: 2}
   collectibleEdgePadding: 0.5
-  minCollectibleSpacing: 5
+  minCollectibleSpacing: 4
   smallCandyWeight: 0.6
-  bigCandyWeight: 0.3
-  gunWeight: 0.1
+  bigCandyWeight: 0.2
+  gunWeight: 0.2
   playerSpawnClearRadius: 10
 --- !u!4 &1639456256
 Transform:

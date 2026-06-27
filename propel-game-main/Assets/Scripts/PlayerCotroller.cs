@@ -41,6 +41,7 @@ public class PlayerCotroller : MonoBehaviour
     public Vector3 transTotal;
     public Vector2 mouseScreenPos;
     public GameObject bulletPrefab;
+    public float bulletSpeed = 15f;
     
 
     // keep track of max altitude reached
@@ -154,25 +155,20 @@ public class PlayerCotroller : MonoBehaviour
         // LINE RENDERER
         if (mouseOn == 1f && shotTracker == 0 && ammoCount > 0 && hasGun)
         {
-            Vector2 mouseScreenPos = LookAction.ReadValue<Vector2>();
-            GameObject bulletFix = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Rigidbody2D bulletRigid = bulletFix.GetComponent<Rigidbody2D>();
-            Vector2 tempBulletV = mouseScreenPos - new Vector2(490.67f, 206.67f);
-            bulletRigid.linearVelocity = tempBulletV * new Vector2(0.1f, 0.1f);
-            ammoCount -= 1;
-            shotTracker = 1;
-            
-            Debug.Log("mouse position" + mouseScreenPos);
-            Debug.Log("linear velocity" + bulletRigid.linearVelocity);
-            Vector3 mouseWorldPos =
-                    Camera.main.ScreenToWorldPoint(
-                        new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z)
-                    );
-
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(LookAction.ReadValue<Vector2>());
             mouseWorldPos.z = 0;
 
-            
+            Vector2 aimDir = (Vector2)(mouseWorldPos - transform.position);
+            aimDir.Normalize();
+
+            GameObject bulletFix = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Rigidbody2D bulletRigid = bulletFix.GetComponent<Rigidbody2D>();
+            bulletRigid.linearVelocity = aimDir * bulletSpeed;
+
+            ammoCount -= 1;
+            shotTracker = 1;
         }
+
         if (mouseOn == 0)
         {
             shotTracker = 0;
