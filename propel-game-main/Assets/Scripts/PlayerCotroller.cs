@@ -134,12 +134,14 @@ public class PlayerCotroller : MonoBehaviour
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
         {
+            Debug.Log($"Thrust used. Remaining: {thrustAllow}");
             playerVelocity.y = 50f;
             thrustAllow -= 1;
             thrustTracker = 1;
         }
         else if (thrustOn == 0f)
         {
+            Debug.Log("Released");
             thrustTracker = 0;
         }
 
@@ -238,7 +240,7 @@ public class PlayerCotroller : MonoBehaviour
 
     public void ApplyShopUpgrades(ShopManager shop)
     {
-        maxThrust = 5 + shop.shopDatabase["Max Thrust"].levelPurchased;
+        maxThrust = 20 + (5 * shop.shopDatabase["Max Thrust"].levelPurchased);
 
         smallCandyThrust = 1 + shop.shopDatabase["Small Candy"].levelPurchased;
 

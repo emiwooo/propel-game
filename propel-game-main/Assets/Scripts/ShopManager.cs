@@ -44,11 +44,11 @@ public class ShopManager : MonoBehaviour
         shopDatabase.Clear();
         
         // Add items to the shop database
-        shopDatabase.Add("Max Thrust", new ShopItem("Max Thrust", new List<int> { 10, 20, 30 }, "Increase maximum thrust.", 0, null));
-        shopDatabase.Add("Small Candy", new ShopItem("Small Candy+", new List<int> { 10, 20, 30 }, "Increases amount of thrust regained from small candy.", 0, null));
-        shopDatabase.Add("Large Candy", new ShopItem("Large Candy", new List<int> { 20, 40, 30 }, "Increases duration of boost from large candy.", 0, null));
-        shopDatabase.Add("Max Ammo", new ShopItem("Max Ammo", new List<int> { 20, 40, 60 }, "Increases amount of bullets in gun by 1.", 0, null));
-        shopDatabase.Add("Pizzazz", new ShopItem("Pizzazz", new List<int> { 100 }, "Increases your pizzazz.", 0, null));
+        shopDatabase.Add("Max Thrust", new ShopItem("Max Thrust", new List<int> { 10, 50, 100, 200, 500 }, "Increase maximum thrust.", 0, null));
+        shopDatabase.Add("Small Candy", new ShopItem("Small Candy+", new List<int> { 20, 50, 100, 200, 500 }, "Increases amount of thrust regained from small candy.", 0, null));
+        shopDatabase.Add("Large Candy", new ShopItem("Large Candy", new List<int> { 20, 50, 100, 200, 500 }, "Increases duration of boost from large candy.", 0, null));
+        shopDatabase.Add("Max Ammo", new ShopItem("Max Ammo", new List<int> { 20, 50, 100 }, "Increases amount of bullets in gun by 1.", 0, null));
+        shopDatabase.Add("Pizzazz", new ShopItem("Pizzazz", new List<int> { 1 }, "Increases your pizzazz.", 0, null));
 
     }
 
