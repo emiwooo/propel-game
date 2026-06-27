@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5847482258936745617}
   m_Layer: 0
   m_Name: gun
-  m_TagString: Untagged
+  m_TagString: collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,4 +181,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   pickupSFX: {fileID: 8300000, guid: 2694eff4536fb3e4481614388640b83e, type: 3}
-  sfxVolume: 0.734

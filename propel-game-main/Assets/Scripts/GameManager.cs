@@ -127,10 +127,10 @@ public class GameManager : MonoBehaviour
 
     public void OpenShop()
     {
-        Debug.Log("OpenShop called, current state: " + CurrentState);
+        //Debug.Log("OpenShop called, current state: " + CurrentState);
         ChangeState(GameState.Shop);
-        Debug.Log("shopPanel assigned: " + (shopPanel != null) + 
-               ", active in hierarchy: " + (shopPanel != null && shopPanel.activeInHierarchy));
+        //Debug.Log("shopPanel assigned: " + (shopPanel != null) + 
+        //       ", active in hierarchy: " + (shopPanel != null && shopPanel.activeInHierarchy));
     }
 
     public void ReturnToMainMenu()

@@ -134,14 +134,14 @@ public class PlayerCotroller : MonoBehaviour
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
         {
-            Debug.Log($"Thrust used. Remaining: {thrustAllow}");
+            //Debug.Log($"Thrust used. Remaining: {thrustAllow}");
             playerVelocity.y = 50f;
             thrustAllow -= 1;
             thrustTracker = 1;
         }
         else if (thrustOn == 0f)
         {
-            Debug.Log("Released");
+            //Debug.Log("Released");
             thrustTracker = 0;
         }
 
@@ -198,6 +198,8 @@ public class PlayerCotroller : MonoBehaviour
         transform.position = spawnPosition;
         currentHeight = spawnPosition.y;
         currentMaxHeight = spawnPosition.y;
+        hasGun = false;
+        ammoCount = 0;
     }
 
     // for thrust bar ui
@@ -235,6 +237,7 @@ public class PlayerCotroller : MonoBehaviour
     public void GunCollected()
     {
         hasGun = true;
+        Debug.Log($"Gun collected. maxAmmo={maxAmmo}, ammoCount={ammoCount}");
         ammoCount = maxAmmo; 
     }
 
@@ -252,7 +255,7 @@ public class PlayerCotroller : MonoBehaviour
 
         // Keep current values within the new limits
         thrustAllow = Mathf.Min(thrustAllow, maxThrust);
-        ammoCount = Mathf.Min(ammoCount, maxAmmo);
+        //ammoCount = Mathf.Min(ammoCount, maxAmmo);
     }
 
         public void BurstConfetti()

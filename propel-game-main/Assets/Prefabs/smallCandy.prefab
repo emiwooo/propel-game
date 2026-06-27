@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4667890518687628862}
   m_Layer: 0
   m_Name: smallCandy
-  m_TagString: Untagged
+  m_TagString: collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Candy
   pickupSFX: {fileID: 8300000, guid: a678cf57e06e67f4ab2ea9af07e0f343, type: 3}
-  sfxVolume: 1
 --- !u!50 &4667890518687628862
 Rigidbody2D:
   serializedVersion: 5

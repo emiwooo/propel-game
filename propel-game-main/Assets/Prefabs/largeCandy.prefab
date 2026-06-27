@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8806929841707855421}
   m_Layer: 0
   m_Name: largeCandy
-  m_TagString: Untagged
+  m_TagString: collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LargeCandy
   pickupSFX: {fileID: 8300000, guid: b6433d822d4dc844caca72741ae9e8f6, type: 3}
-  sfxVolume: 0.8
 --- !u!212 &8091960489174233982
 SpriteRenderer:
   serializedVersion: 3
