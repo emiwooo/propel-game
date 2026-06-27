@@ -117,11 +117,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (playerController.currentHeight > highestAltitude)
+        if (playerController.currentMaxHeight > highestAltitude)
         {
-            highestAltitude = playerController.currentHeight;
+            highestAltitude = playerController.currentMaxHeight;
         }
-        money += (int)playerController.currentHeight/10;
+        money += (int)playerController.currentMaxHeight / 10;
         ChangeState(GameState.GameOver);
     }
 

@@ -62,7 +62,8 @@ public class PlayerCotroller : MonoBehaviour
     public float boostRegenRate = 10f; // i.e. 5 thurst per sec
     
     
-
+    private float fallTime = 0f;
+    public float extraGravityMultiplier = 3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -115,8 +116,19 @@ public class PlayerCotroller : MonoBehaviour
         mouseOn = ShootAction.ReadValue<float>();
         thrustOn = ThrustAction.ReadValue<float>();
 
+        bool isFalling = playerVelocity.y < 0f;
+        if (isFalling)
+        {
+            fallTime += dt;
+        }
+        else
+        {
+            fallTime = 0f;
+        }
+
         // ACCELERATION
-        Vector2 acceleration = new Vector2(0f, -80f); // gravity
+        float gravity = -80f;
+        float scaledGravity = gravity * (1f + fallTime * extraGravityMultiplier);
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
         {
@@ -130,16 +142,17 @@ public class PlayerCotroller : MonoBehaviour
         }
 
         // VELOCITY
-        playerVelocity += acceleration * dt;
+        playerVelocity += new Vector2(0f, scaledGravity) * dt;
         playerVelocity.y *= 0.99f; // resistance feeling
         
-
+/*
         if (groundControl.playerY == 0f)
             {
                 playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 0.5f);
                 
             }
-        
+*/
+
         //transTotal = (Vector3)playerVelocity + movement;
         //transform.position += (Vector3)playerVelocity + movement;
         transform.position += (Vector3)(playerVelocity * dt);
@@ -177,15 +190,18 @@ public class PlayerCotroller : MonoBehaviour
             currentMaxHeight = currentHeight;
         }
         //Debug.Log("Current Height: " + currentHeight);
+        Debug.Log("Current Max Height: " + currentMaxHeight);
+       //Debug.Log("Highets Score: " + GameManager.Instance.highestAltitude);
 
         Debug.Log(thrustAllow);
 
         // for testing
+/*
         if (thrustAllow <= 0)
         {
             GameManager.Instance.GameOver();
         }
-
+*/
     }
 
     public void resetPlayerState()

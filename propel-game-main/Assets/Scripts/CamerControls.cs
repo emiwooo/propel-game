@@ -5,6 +5,7 @@ public class CamerControls : MonoBehaviour
     public PlayerCotroller playerScript;
     public float camerY;
     [SerializeField] public float verticalOffset;
+    public float minCameraY = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,20 +16,17 @@ public class CamerControls : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        float targetY = playerScript.transform.position.y + verticalOffset;
 
-//        camerY = playerScript.transTotal.y;
-//        transform.position += new Vector3(0, camerY, 0);
-        
+        targetY = Mathf.Max(targetY, minCameraY);
+
         Vector3 pos = transform.position;
-        pos.y = playerScript.transform.position.y + verticalOffset;
-        //pos.y = playerScript.transform.position.y;
+        pos.y = targetY;
         transform.position = pos;
 
-        Debug.Log(
-            "PlayerY: " + playerScript.transform.position.y +
-            " CameraY: " + transform.position.y +
-            " Diff: " + (transform.position.y - playerScript.transform.position.y)
-        );
-        
+        if (transform.position.y <= minCameraY)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 }
