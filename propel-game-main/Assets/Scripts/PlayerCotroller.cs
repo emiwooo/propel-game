@@ -53,8 +53,8 @@ public class PlayerCotroller : MonoBehaviour
 
     // gun
     public bool hasGun = false;
-    public int maxAmmo = 5; // can be upgraded in shop
-    public int ammoCount = 5;
+    public int maxAmmo = 3; // can be upgraded in shop
+    public int ammoCount = 3;
     public float shotTracker = 0;
 
     // boost
@@ -244,7 +244,7 @@ public class PlayerCotroller : MonoBehaviour
 
         boostDuration = 1f + 0.5f * shop.shopDatabase["Large Candy"].levelPurchased;
 
-        maxAmmo = 5 + shop.shopDatabase["Max Ammo"].levelPurchased;
+        maxAmmo = 3 + shop.shopDatabase["Max Ammo"].levelPurchased;
 
         pizzazzPurchased = shop.shopDatabase["Pizzazz"].levelPurchased > 0;
 
