@@ -158,7 +158,7 @@ MonoBehaviour:
   currentHealth: 1
   maxHealth: 1
   spawnSFX: {fileID: 0}
-  deathSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: 46f7d85bd8c71734fa3adc8f5f45155a, type: 3}
   sfxVolume: 0.8
 --- !u!50 &626030073523399406
 Rigidbody2D:

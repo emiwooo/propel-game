@@ -52,7 +52,7 @@ MonoBehaviour:
   currentHealth: 2
   maxHealth: 2
   spawnSFX: {fileID: 0}
-  deathSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: d02259c7ce236954c9cbc1e55fbc08ed, type: 3}
   sfxVolume: 0.8
 --- !u!212 &6907353619539531782
 SpriteRenderer:
