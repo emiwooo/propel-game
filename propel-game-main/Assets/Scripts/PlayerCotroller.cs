@@ -41,7 +41,7 @@ public class PlayerCotroller : MonoBehaviour
     public Vector3 transTotal;
     public Vector2 mouseScreenPos;
     public GameObject bulletPrefab;
-    public Rigidbody2D bulletRigid;
+    
 
     // keep track of max altitude reached
     public float currentHeight = 0;
@@ -54,6 +54,7 @@ public class PlayerCotroller : MonoBehaviour
     public bool hasGun = false;
     public int maxAmmo = 5; // can be upgraded in shop
     public int ammoCount = 5;
+    public float shotTracker = 0;
 
     // boost
     public bool hasBoost = false;
@@ -160,13 +161,17 @@ public class PlayerCotroller : MonoBehaviour
         
 
         // LINE RENDERER
-        if (mouseOn == 1f)
+        if (mouseOn == 1f && shotTracker == 0 && ammoCount > 0)
         {
-            lineRenderer.enabled = true;
+            
 
             Vector2 mouseScreenPos = LookAction.ReadValue<Vector2>();
-            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bulletRigid = bulletPrefab.GetComponent<Rigidbody2D>();
+            GameObject bulletFix = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Rigidbody2D bulletRigid = bulletFix.GetComponent<Rigidbody2D>();
+            Vector2 tempBulletV = mouseScreenPos - new Vector2(490.67f, 206.67f);
+            bulletRigid.linearVelocity = tempBulletV * new Vector2(0.1f, 0.1f);
+            ammoCount -= 1;
+            shotTracker = 1;
             
             Debug.Log(bulletRigid.linearVelocity);
         Vector3 mouseWorldPos =
@@ -176,12 +181,11 @@ public class PlayerCotroller : MonoBehaviour
 
             mouseWorldPos.z = 0;
 
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, mouseWorldPos);
+            
         }
-        else
+        if (mouseOn == 0)
         {
-            lineRenderer.enabled = false;
+            shotTracker = 0;
         }
 
         currentHeight = transform.position.y; // for ui

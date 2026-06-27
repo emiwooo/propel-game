@@ -99,5 +99,9 @@ public abstract class Enemy : MonoBehaviour
             }
             Debug.Log("Player collided with enemy: " + gameObject.name);
         }
+        if (collision.gameObject.Comparetag("bullet")) 
+        {
+            TakeDamage(1);
+        }
     }
 }
