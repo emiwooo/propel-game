@@ -24,9 +24,9 @@ public class CamerControls : MonoBehaviour
         pos.y = targetY;
         transform.position = pos;
 
-        if (transform.position.y <= minCameraY)
+        if (transform.position.y <= minCameraY && GameManager.Instance.CurrentState == GameManager.GameState.Playing)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver();    
         }
     }
 }
