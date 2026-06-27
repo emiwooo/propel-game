@@ -4,6 +4,7 @@ public class CamerControls : MonoBehaviour
 {
     public PlayerCotroller playerScript;
     public float camerY;
+    [SerializeField] public float verticalOffset;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,8 +20,15 @@ public class CamerControls : MonoBehaviour
 //        transform.position += new Vector3(0, camerY, 0);
         
         Vector3 pos = transform.position;
-        pos.y = playerScript.transform.position.y;
+        pos.y = playerScript.transform.position.y + verticalOffset;
+        //pos.y = playerScript.transform.position.y;
         transform.position = pos;
+
+        Debug.Log(
+            "PlayerY: " + playerScript.transform.position.y +
+            " CameraY: " + transform.position.y +
+            " Diff: " + (transform.position.y - playerScript.transform.position.y)
+        );
         
     }
 }

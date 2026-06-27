@@ -22,6 +22,7 @@ public class PlayerCotroller : MonoBehaviour
     public InputAction LookAction;
     public InputAction ThrustAction;
     public InputAction ShootAction;
+    public float moveSpeed = 3f;
 
     // thrust
     public float thrustOn = 0f;
@@ -56,9 +57,9 @@ public class PlayerCotroller : MonoBehaviour
 
     // boost
     public bool hasBoost = false;
-    public float boostDuration = 1f; // 1 sec
+    public float boostDuration = 2f; // 2 sec
     public float boostTimer = 0f;
-    public float boostRegenRate = 2f; // i.e. 2 thurst per sec
+    public float boostRegenRate = 10f; // i.e. 5 thurst per sec
     
     
 
@@ -115,11 +116,11 @@ public class PlayerCotroller : MonoBehaviour
         thrustOn = ThrustAction.ReadValue<float>();
 
         // ACCELERATION
-        Vector2 acceleration = new Vector2(0f, -0.003f); // gravity
+        Vector2 acceleration = new Vector2(0f, -80f); // gravity
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
         {
-            acceleration.y = 0.2f; // thrust up
+            playerVelocity.y = 50f;
             thrustAllow -= 1;
             thrustTracker = 1;
         }
@@ -129,23 +130,20 @@ public class PlayerCotroller : MonoBehaviour
         }
 
         // VELOCITY
-        playerVelocity += acceleration;
+        playerVelocity += acceleration * dt;
+        playerVelocity.y *= 0.99f; // resistance feeling
         
 
-        playerVelocity.y = Mathf.Clamp(playerVelocity.y, -3f, 0.5f);
-            
-            // MOVOE!!!
-            Vector3 movement =
-            new Vector3(moveInput.x, 0, 0) * 3f * dt;
-        
         if (groundControl.playerY == 0f)
             {
                 playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 0.5f);
                 
             }
         
-        transTotal = (Vector3)playerVelocity + movement;
-        transform.position += (Vector3)playerVelocity + movement;
+        //transTotal = (Vector3)playerVelocity + movement;
+        //transform.position += (Vector3)playerVelocity + movement;
+        transform.position += (Vector3)(playerVelocity * dt);
+        transform.position += Vector3.right * moveInput.x * moveSpeed * dt;
         
 
         // LINE RENDERER
@@ -195,7 +193,7 @@ public class PlayerCotroller : MonoBehaviour
         thrustAllow = maxThrust;
         thrustTracker = 0;
         playerVelocity = new Vector2(0.0f, 0.0f);
-        transTotal = Vector3.zero;
+        //transTotal = Vector3.zero;
         transform.position = spawnPosition;
         currentHeight = spawnPosition.y;
         currentMaxHeight = spawnPosition.y;
@@ -229,7 +227,7 @@ public class PlayerCotroller : MonoBehaviour
 
     public void SmallCandyCollected()
     {
-        thrustAllow += smallCandyThrust;
+        thrustAllow += smallCandyThrust * 3;
         thrustAllow = Mathf.Min(thrustAllow, maxThrust); // Ensure thrust does not exceed maxThrust
     }
 

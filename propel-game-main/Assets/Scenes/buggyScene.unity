@@ -991,6 +991,7 @@ MonoBehaviour:
       m_Action: Shoot
       m_Flags: 0
     m_Flags: 0
+  moveSpeed: 3
   thrustOn: 0
   maxThrust: 20
   thrustAllow: 20
@@ -3351,6 +3352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CamerControls
   playerScript: {fileID: 227886565}
   camerY: 0
+  verticalOffset: 3
 --- !u!1 &780704808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,7 +4563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerController: {fileID: 227886565}
-  camerControls: {fileID: 777599130}
+  camerControls: {fileID: 0}
   levelGenerator: {fileID: 1639456255}
   highestAltitude: 0
   PauseAction:
@@ -10466,12 +10468,12 @@ MonoBehaviour:
   - {fileID: 1702022470255776356, guid: 6be8be96b4e08474fb5e9e643cdc04ca, type: 3}
   - {fileID: 1865912276271625808, guid: b92cfee534ffd8941a3c23d25566cf67, type: 3}
   - {fileID: 1968440646934726919, guid: 8be9a665789551741917d34ac955f519, type: 3}
-  bandHeight: 25
+  bandHeight: 30
   lookAheadDistance: 15
-  despawnBehindDistance: 10
+  despawnBehindDistance: 50
   enemiesPerBand: {x: 1, y: 3}
   enemyEdgePadding: 0.5
-  minEnemySpacing: 2.5
+  minEnemySpacing: 10
   cloudsPerBand: {x: 2, y: 4}
   cloudOverflow: 2
   minCloudSpacing: 1.5
@@ -10483,11 +10485,11 @@ MonoBehaviour:
   - {fileID: 754934270600475655, guid: 600d0389d7358de46b71adf8b22a90c6, type: 3}
   collectiblesPerBand: {x: 1, y: 2}
   collectibleEdgePadding: 0.5
-  minCollectibleSpacing: 2
+  minCollectibleSpacing: 5
   smallCandyWeight: 0.6
   bigCandyWeight: 0.3
   gunWeight: 0.1
-  playerSpawnClearRadius: 50
+  playerSpawnClearRadius: 10
 --- !u!4 &1639456256
 Transform:
   m_ObjectHideFlags: 0
