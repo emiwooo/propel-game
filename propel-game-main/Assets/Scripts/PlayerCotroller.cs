@@ -41,7 +41,7 @@ public class PlayerCotroller : MonoBehaviour
     public Vector3 transTotal;
     public Vector2 mouseScreenPos;
     public GameObject bulletPrefab;
-    public float bulletSpeed = 15f;
+    public float bulletSpeed = 20f;
     
 
     // keep track of max altitude reached

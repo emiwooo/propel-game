@@ -19,6 +19,11 @@ public class PriceDisplay : MonoBehaviour
         
     }
 
+    public void Refresh()
+    {
+        UpdatePriceText();
+    }
+
     public void UpdatePriceText()
     {
         if (shopManager.shopDatabase.ContainsKey(targetItemName))

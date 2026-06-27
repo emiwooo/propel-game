@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable] 
-public struct ShopItem
+public class ShopItem
 {
     public string itemName;
     public List<int> prices;
@@ -67,6 +67,12 @@ public class ShopManager : MonoBehaviour
                     item.levelPurchased++;
                     shopDatabase[itemName] = item; 
                     player.ApplyShopUpgrades(this);
+                    PriceDisplay[] displays = FindObjectsOfType<PriceDisplay>();
+                    foreach (var d in displays)
+                    {
+                        d.Refresh();
+                    }
+                    
                     Debug.Log($"Purchased {itemName} for {price}. New level: {item.levelPurchased}");
                 }
                 else
