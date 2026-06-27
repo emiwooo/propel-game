@@ -5,8 +5,7 @@ using UnityEngine;
 
 public abstract class CollectBehaviour : MonoBehaviour
 {
-    [SerializeField] public AudioClip pickupSFX;
-    [SerializeField] [Range(0f, 1f)] private float sfxVolume = 0.8f;
+    public AudioClip pickupSFX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,7 +28,7 @@ public abstract class CollectBehaviour : MonoBehaviour
             {
                 Collect(player);
             }
-            Debug.Log("Player collided with collectible: " + gameObject.name);
+            //Debug.Log("Player collided with collectible: " + gameObject.name);
         }
     }
 
@@ -37,7 +36,7 @@ public abstract class CollectBehaviour : MonoBehaviour
     {
         if (clip != null)
         {
-            AudioSource.PlayClipAtPoint(clip, transform.position, sfxVolume);
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         }
     }
 

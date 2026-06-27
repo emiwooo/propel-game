@@ -13,7 +13,7 @@ public class PlayerCotroller : MonoBehaviour
 {
     
     public ParticleSystem confettiParticleSystem;
-    public Vector3 spawnPosition = Vector3.zero;
+    public Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
 
     public Vector2 playerVelocity = new Vector2(0.0f, 0.0f);
     Vector2 playerAcceleration = new Vector2(0.0f, -0.1f);
@@ -58,9 +58,9 @@ public class PlayerCotroller : MonoBehaviour
 
     // boost
     public bool hasBoost = false;
-    public float boostDuration = 2f; // 2 sec
+    public float boostDuration = 1f; // 2 sec
     public float boostTimer = 0f;
-    public float boostRegenRate = 10f; // i.e. 5 thurst per sec
+    public float boostRegenRate = 20f; // i.e. 5 thurst per sec
     
     
     private float fallTime = 0f;
@@ -128,7 +128,7 @@ public class PlayerCotroller : MonoBehaviour
         }
 
         // ACCELERATION
-        float gravity = -80f;
+        float gravity = -50f;
         float scaledGravity = gravity * (1f + fallTime * extraGravityMultiplier);
 
         if (thrustOn == 1f && thrustAllow > 0 && thrustTracker == 0)
@@ -145,26 +145,15 @@ public class PlayerCotroller : MonoBehaviour
         // VELOCITY
         playerVelocity += new Vector2(0f, scaledGravity) * dt;
         playerVelocity.y *= 0.99f; // resistance feeling
-        
-/*
-        if (groundControl.playerY == 0f)
-            {
-                playerVelocity.y = Mathf.Clamp(playerVelocity.y, 0f, 0.5f);
-                
-            }
-*/
 
-        //transTotal = (Vector3)playerVelocity + movement;
-        //transform.position += (Vector3)playerVelocity + movement;
+
         transform.position += (Vector3)(playerVelocity * dt);
         transform.position += Vector3.right * moveInput.x * moveSpeed * dt;
         
 
         // LINE RENDERER
-        if (mouseOn == 1f && shotTracker == 0 && ammoCount > 0)
+        if (mouseOn == 1f && shotTracker == 0 && ammoCount > 0 && hasGun)
         {
-            
-
             Vector2 mouseScreenPos = LookAction.ReadValue<Vector2>();
             GameObject bulletFix = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody2D bulletRigid = bulletFix.GetComponent<Rigidbody2D>();
@@ -173,11 +162,12 @@ public class PlayerCotroller : MonoBehaviour
             ammoCount -= 1;
             shotTracker = 1;
             
-            Debug.Log(bulletRigid.linearVelocity);
-        Vector3 mouseWorldPos =
-                Camera.main.ScreenToWorldPoint(
-                    new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z)
-                );
+            Debug.Log("mouse position" + mouseScreenPos);
+            Debug.Log("linear velocity" + bulletRigid.linearVelocity);
+            Vector3 mouseWorldPos =
+                    Camera.main.ScreenToWorldPoint(
+                        new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z)
+                    );
 
             mouseWorldPos.z = 0;
 
@@ -188,24 +178,17 @@ public class PlayerCotroller : MonoBehaviour
             shotTracker = 0;
         }
 
+        if (ammoCount <= 0)
+        {
+            hasGun = false;
+        }
+
         currentHeight = transform.position.y; // for ui
         if (currentHeight > currentMaxHeight)
         {
             currentMaxHeight = currentHeight;
         }
-        //Debug.Log("Current Height: " + currentHeight);
-        Debug.Log("Current Max Height: " + currentMaxHeight);
-       //Debug.Log("Highets Score: " + GameManager.Instance.highestAltitude);
 
-        Debug.Log(thrustAllow);
-
-        // for testing
-/*
-        if (thrustAllow <= 0)
-        {
-            GameManager.Instance.GameOver();
-        }
-*/
     }
 
     public void resetPlayerState()

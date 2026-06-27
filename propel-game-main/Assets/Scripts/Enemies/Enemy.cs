@@ -97,9 +97,9 @@ public abstract class Enemy : MonoBehaviour
             {
                 player.TakeDamage(1); 
             }
-            Debug.Log("Player collided with enemy: " + gameObject.name);
+            //Debug.Log("Player collided with enemy: " + gameObject.name);
         }
-        if (collision.gameObject.Comparetag("bullet")) 
+        if (collision.gameObject.CompareTag("bullet")) 
         {
             TakeDamage(1);
         }

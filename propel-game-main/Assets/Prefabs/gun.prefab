@@ -180,5 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430667f2ce2bebe45ae43f6921520492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
-  pickupSFX: {fileID: 0}
-  sfxVolume: 0.8
+  pickupSFX: {fileID: 8300000, guid: 2694eff4536fb3e4481614388640b83e, type: 3}
+  sfxVolume: 0.734

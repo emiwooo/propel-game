@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d606ab2b672664ca350bad404cf6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Candy
-  pickupSFX: {fileID: 0}
-  sfxVolume: 0.8
+  pickupSFX: {fileID: 8300000, guid: a678cf57e06e67f4ab2ea9af07e0f343, type: 3}
+  sfxVolume: 1
 --- !u!50 &4667890518687628862
 Rigidbody2D:
   serializedVersion: 5
