@@ -123,14 +123,13 @@ public class GameManager : MonoBehaviour
         }
         money += (int)playerController.currentMaxHeight / 10;
         ChangeState(GameState.GameOver);
+        // resetting again just in case
+        levelGenerator.ResetAndGenerate();
     }
 
     public void OpenShop()
     {
-        //Debug.Log("OpenShop called, current state: " + CurrentState);
         ChangeState(GameState.Shop);
-        //Debug.Log("shopPanel assigned: " + (shopPanel != null) + 
-        //       ", active in hierarchy: " + (shopPanel != null && shopPanel.activeInHierarchy));
     }
 
     public void ReturnToMainMenu()

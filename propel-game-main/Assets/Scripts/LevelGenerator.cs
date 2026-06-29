@@ -39,8 +39,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float minCollectibleSpacing = 3f;
     [Tooltip("Relative odds of each collectible type being chosen. They don't need to add up to any particular total.")]
     [SerializeField] private float smallCandyWeight = 0.6f;
-    [SerializeField] private float bigCandyWeight = 0.3f;
-    [SerializeField] private float gunWeight = 0.1f;
+    [SerializeField] private float bigCandyWeight = 0.2f;
+    [SerializeField] private float gunWeight = 0.2f;
 
     [Header("Player Clear Zone")]
     [Tooltip("Nothing will spawn within this radius of the player's spawn point.")]

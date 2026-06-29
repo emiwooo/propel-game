@@ -991,10 +991,10 @@ MonoBehaviour:
       m_Action: Shoot
       m_Flags: 0
     m_Flags: 0
-  moveSpeed: 3
+  moveSpeed: 4
   thrustOn: 0
-  maxThrust: 20
-  thrustAllow: 20
+  maxThrust: 15
+  thrustAllow: 15
   mouseOn: 0
   thrustTracker: 0
   lineTracker: 0
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   transTotal: {x: 0, y: 0, z: 0}
   mouseScreenPos: {x: 0, y: 0}
   bulletPrefab: {fileID: 1513417479154052079, guid: 6990df27ef14cce4ca7e864186c08235, type: 3}
-  bulletSpeed: 15
+  bulletSpeed: 20
   currentHeight: 0
   currentMaxHeight: 0
   smallCandyThrust: 1
@@ -1013,9 +1013,7 @@ MonoBehaviour:
   shotTracker: 0
   hasBoost: 0
   boostDuration: 1
-  boostTimer: 0
   boostRegenRate: 2
-  extraGravityMultiplier: 3
 --- !u!114 &227886566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10747,7 +10745,7 @@ MonoBehaviour:
   despawnBehindDistance: 50
   enemiesPerBand: {x: 1, y: 3}
   enemyEdgePadding: 0.5
-  minEnemySpacing: 10
+  minEnemySpacing: 20
   cloudsPerBand: {x: 2, y: 4}
   cloudOverflow: 2
   minCloudSpacing: 1.5

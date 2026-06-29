@@ -11,29 +11,30 @@ using UnityEngine.UIElements;
 
 public class PlayerCotroller : MonoBehaviour
 {
-    
+
     public ParticleSystem confettiParticleSystem;
     public Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
 
     public Vector2 playerVelocity = new Vector2(0.0f, 0.0f);
     Vector2 playerAcceleration = new Vector2(0.0f, -0.1f);
     Vector2 realAcceleration = new Vector2(0.0f, 0.0f);
+
+    // input
     public InputAction MoveAction;
     public InputAction LookAction;
     public InputAction ThrustAction;
     public InputAction ShootAction;
-    public float moveSpeed = 3f;
+    public float moveSpeed = 4f;
 
     // thrust
     public float thrustOn = 0f;
-    public float maxThrust = 20f; // can be upgraded in shop
-    public float thrustAllow = 20f;
+    public float maxThrust = 15f; // can be upgraded in shop
+    public float thrustAllow = 15f;
 
 
     public float mouseOn = 0;
     public float thrustTracker = 0;
     public float lineTracker = 0;
-    //Vector2 cursorOffset = new Vector2(168f, 203f);
     public bool pizzazzPurchased = false;
 
     private LineRenderer lineRenderer;
@@ -59,13 +60,20 @@ public class PlayerCotroller : MonoBehaviour
 
     // boost
     public bool hasBoost = false;
-    public float boostDuration = 1f; // 2 sec
-    public float boostTimer = 0f;
+    public float boostDuration = 1f; // 2 sec, can be upgraded
+    private float boostTimer = 0f;
     public float boostRegenRate = 20f; // i.e. 5 thurst per sec
     
     
+    // player falls faster the further they fall
     private float fallTime = 0f;
-    public float extraGravityMultiplier = 3f;
+    private float gameOverTime = 2f; // instant game over if thrust-less and falling for 5 secs
+    private float extraGravityMultiplier = 3f;
+
+    // so player doesn't immediately die lol
+    private bool gameStarted = false;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -83,8 +91,6 @@ public class PlayerCotroller : MonoBehaviour
 
         lineRenderer.enabled = false;
         
-
-
 
     }
 
@@ -118,6 +124,13 @@ public class PlayerCotroller : MonoBehaviour
         mouseOn = ShootAction.ReadValue<float>();
         thrustOn = ThrustAction.ReadValue<float>();
 
+        // has player started pressing thrust button?
+        if (!gameStarted && thrustOn == 1f)
+        {
+            gameStarted = true;
+        }
+
+        // falling time tracker
         bool isFalling = playerVelocity.y < 0f;
         if (isFalling)
         {
@@ -141,20 +154,24 @@ public class PlayerCotroller : MonoBehaviour
         }
         else if (thrustOn == 0f)
         {
-            //Debug.Log("Released");
             thrustTracker = 0;
         }
 
         // VELOCITY
-        playerVelocity += new Vector2(0f, scaledGravity) * dt;
-        playerVelocity.y *= 0.99f; // resistance feeling
-
+        if (gameStarted) {
+            playerVelocity += new Vector2(0f, scaledGravity) * dt;
+            playerVelocity.y *= 0.99f; // resistance feeling
+        } else
+        {
+            // if no input yet, no velocity yet either
+            playerVelocity = new Vector2(0.0f, 0.0f);;
+        }
 
         transform.position += (Vector3)(playerVelocity * dt);
         transform.position += Vector3.right * moveInput.x * moveSpeed * dt;
         
 
-        // LINE RENDERER
+        // SHOOTY
         if (mouseOn == 1f && shotTracker == 0 && ammoCount > 0 && hasGun)
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(LookAction.ReadValue<Vector2>());
@@ -181,20 +198,26 @@ public class PlayerCotroller : MonoBehaviour
             hasGun = false;
         }
 
-        currentHeight = transform.position.y; // for ui
+        currentHeight = MathF.Max(transform.position.y, 0); // for ui
         if (currentHeight > currentMaxHeight)
         {
             currentMaxHeight = currentHeight;
+        }
+
+        if (thrustAllow <= 0 && fallTime > gameOverTime) 
+        {
+            Debug.Log("fell to death");
+            GameManager.Instance.GameOver();
         }
 
     }
 
     public void resetPlayerState()
     {
+        gameStarted = false;
         thrustAllow = maxThrust;
         thrustTracker = 0;
-        playerVelocity = new Vector2(0.0f, 0.0f);
-        //transTotal = Vector3.zero;
+        playerVelocity = new Vector2(0.0f, 0.0f);;
         transform.position = spawnPosition;
         currentHeight = spawnPosition.y;
         currentMaxHeight = spawnPosition.y;
@@ -230,24 +253,24 @@ public class PlayerCotroller : MonoBehaviour
 
     public void SmallCandyCollected()
     {
-        thrustAllow += smallCandyThrust * 3;
+        thrustAllow += smallCandyThrust * 2;
         thrustAllow = Mathf.Min(thrustAllow, maxThrust); // Ensure thrust does not exceed maxThrust
     }
 
     public void GunCollected()
     {
         hasGun = true;
-        Debug.Log($"Gun collected. maxAmmo={maxAmmo}, ammoCount={ammoCount}");
+        //Debug.Log($"Gun collected. maxAmmo={maxAmmo}, ammoCount={ammoCount}");
         ammoCount = maxAmmo; 
     }
 
     public void ApplyShopUpgrades(ShopManager shop)
     {
-        maxThrust = 20 + (5 * shop.shopDatabase["Max Thrust"].levelPurchased);
+        maxThrust = 20 + (2 * shop.shopDatabase["Max Thrust"].levelPurchased);
 
         smallCandyThrust = 1 + shop.shopDatabase["Small Candy"].levelPurchased;
 
-        boostDuration = 1f + 0.5f * shop.shopDatabase["Large Candy"].levelPurchased;
+        boostDuration = 1f + 0.2f * shop.shopDatabase["Large Candy"].levelPurchased;
 
         maxAmmo = 3 + shop.shopDatabase["Max Ammo"].levelPurchased;
 
