@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6907353619539531782}
   - component: {fileID: 7871838784009785893}
   - component: {fileID: 5988993728698054109}
+  - component: {fileID: 1229347901906769315}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -187,3 +188,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1229347901906769315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345991647322143132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ba51b2234c83646b4c022a3cb5101d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFlash
+  flashColor: {r: 1, g: 0.32941177, b: 0.40784314, a: 1}
+  flashDuration: 0.15

@@ -13,6 +13,7 @@ public class PlayerCotroller : MonoBehaviour
 {
 
     public ParticleSystem confettiParticleSystem;
+    private SpriteFlash spriteFlash;
     public Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
 
     public Vector2 playerVelocity = new Vector2(0.0f, 0.0f);
@@ -43,6 +44,10 @@ public class PlayerCotroller : MonoBehaviour
     public Vector2 mouseScreenPos;
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
+
+    // give player temp immunity after taking damage
+    private float iSecs = 0.7f;
+    private float iTimer = 0.0f;
     
 
     // keep track of max altitude reached
@@ -90,6 +95,8 @@ public class PlayerCotroller : MonoBehaviour
         ShootAction.Enable();
 
         lineRenderer.enabled = false;
+
+        spriteFlash = GetComponent<SpriteFlash>();
         
 
     }
@@ -204,6 +211,9 @@ public class PlayerCotroller : MonoBehaviour
             currentMaxHeight = currentHeight;
         }
 
+        // damage time tracker
+        iTimer += dt;
+
         if (thrustAllow <= 0 && fallTime > gameOverTime) 
         {
             Debug.Log("fell to death");
@@ -237,6 +247,20 @@ public class PlayerCotroller : MonoBehaviour
         {
             // If boost is active, ignore damage
             return;
+        }
+
+        // still have invinc frames?
+        if (iTimer <= iSecs)
+        {
+            return;
+        } else
+        {
+            iTimer = 0; // yes can damage, reset timer 
+        }
+
+        if (spriteFlash != null)
+        {
+            spriteFlash.CallFlash();
         }
 
         thrustAllow -= damage;

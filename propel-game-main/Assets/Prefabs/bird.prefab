@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4293158826560148941}
   - component: {fileID: 4626694043199642091}
   - component: {fileID: 626030073523399406}
+  - component: {fileID: -8940786996262933355}
   m_Layer: 0
   m_Name: bird
   m_TagString: Untagged
@@ -187,3 +188,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &-8940786996262933355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443764280835639085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ba51b2234c83646b4c022a3cb5101d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteFlash
+  flashColor: {r: 1, g: 0.32941177, b: 0.40784314, a: 1}
+  flashDuration: 0.15

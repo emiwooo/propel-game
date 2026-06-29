@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    private SpriteFlash spriteFlash;
+
     [Header("Enemy Movement")]
     [SerializeField] protected float speed = 3f; // horizontal speed
     [SerializeField] protected float range = 5f; // horizontal range
@@ -29,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
     void Start()
     {
         PlaySound(spawnSFX);
+        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     // Update is called once per frame
@@ -61,6 +64,10 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        if (spriteFlash != null)
+        {
+            spriteFlash.CallFlash();
+        }
         if (currentHealth <= 0)
         {
             Die();
