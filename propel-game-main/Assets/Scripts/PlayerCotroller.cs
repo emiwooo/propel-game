@@ -11,6 +11,7 @@ using UnityEngine.UIElements;
 
 public class PlayerCotroller : MonoBehaviour
 {
+    private float xBound = 7.0f;
 
     public ParticleSystem confettiParticleSystem;
     private SpriteFlash spriteFlash;
@@ -43,7 +44,7 @@ public class PlayerCotroller : MonoBehaviour
     public Vector3 transTotal;
     public Vector2 mouseScreenPos;
     public GameObject bulletPrefab;
-    public float bulletSpeed = 20f;
+    public float bulletSpeed = 45f;
 
     // give player temp immunity after taking damage
     private float iSecs = 0.7f;
@@ -59,7 +60,7 @@ public class PlayerCotroller : MonoBehaviour
 
     // gun
     public bool hasGun = false;
-    public int maxAmmo = 3; // can be upgraded in shop
+    public int maxAmmo = 5; // can be upgraded in shop
     public int ammoCount = 3;
     public float shotTracker = 0;
 
@@ -174,8 +175,14 @@ public class PlayerCotroller : MonoBehaviour
             playerVelocity = new Vector2(0.0f, 0.0f);;
         }
 
-        transform.position += (Vector3)(playerVelocity * dt);
-        transform.position += Vector3.right * moveInput.x * moveSpeed * dt;
+        // DISPLACEMENT
+        Vector3 pos = transform.position;
+        pos += (Vector3)(playerVelocity * dt);
+        pos += Vector3.right * moveInput.x * moveSpeed * dt;
+
+        pos.x = Mathf.Clamp(pos.x, -xBound, xBound);
+
+        transform.position = pos;
         
 
         // SHOOTY
@@ -189,6 +196,7 @@ public class PlayerCotroller : MonoBehaviour
 
             GameObject bulletFix = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody2D bulletRigid = bulletFix.GetComponent<Rigidbody2D>();
+            aimDir.Normalize();
             bulletRigid.linearVelocity = aimDir * bulletSpeed;
 
             ammoCount -= 1;
@@ -296,7 +304,7 @@ public class PlayerCotroller : MonoBehaviour
 
         boostDuration = 1f + 0.2f * shop.shopDatabase["Large Candy"].levelPurchased;
 
-        maxAmmo = 3 + shop.shopDatabase["Max Ammo"].levelPurchased;
+        maxAmmo = 5 * (shop.shopDatabase["Max Ammo"].levelPurchased + 1);
 
         pizzazzPurchased = shop.shopDatabase["Pizzazz"].levelPurchased > 0;
 
