@@ -154,13 +154,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fb49fc1f46058489643d6048c267c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bird
+  player: {fileID: 0}
   speed: 3
   range: 5
   currentHealth: 1
   maxHealth: 1
   spawnSFX: {fileID: 0}
   deathSFX: {fileID: 8300000, guid: 46f7d85bd8c71734fa3adc8f5f45155a, type: 3}
-  sfxVolume: 0.8
 --- !u!50 &626030073523399406
 Rigidbody2D:
   serializedVersion: 5

@@ -7,5 +7,6 @@ public class LargeCandy : CollectBehaviour
         player.ActivateBoost();
         PlaySound(pickupSFX);
         Destroy(gameObject);
+        player.candyCollected++;
     }
 }

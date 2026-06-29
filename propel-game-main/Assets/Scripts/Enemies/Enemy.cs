@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     private SpriteFlash spriteFlash;
+    public PlayerCotroller player;
 
     [Header("Enemy Movement")]
     [SerializeField] protected float speed = 3f; // horizontal speed
@@ -36,6 +37,12 @@ public abstract class Enemy : MonoBehaviour
     {
         PlaySound(spawnSFX);
         spriteFlash = GetComponent<SpriteFlash>();
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.GetComponent<PlayerCotroller>();
+        }
     }
 
     // Update is called once per frame

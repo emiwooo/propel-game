@@ -6,11 +6,16 @@ using UnityEngine;
 public abstract class CollectBehaviour : MonoBehaviour
 {
     public AudioClip pickupSFX;
+    public PlayerCotroller player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.GetComponent<PlayerCotroller>();
+        }
     }
 
     // Update is called once per frame

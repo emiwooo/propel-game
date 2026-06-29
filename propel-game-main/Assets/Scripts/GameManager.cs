@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
         Paused,
         GameOver,
         Shop,
-        Controls
+        Controls,
+        Stats
     }
     public GameState CurrentState { get; private set; }
     public float highestAltitude = 0;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject statsPanel;
 
     [Header("Player Stats")]
     public int money { get; set; } = 0;
@@ -76,6 +78,7 @@ public class GameManager : MonoBehaviour
         if (gameOverPanel) gameOverPanel.SetActive(false);
         if (shopPanel) shopPanel.SetActive(false);
         if (controlsPanel) controlsPanel.SetActive(false);
+        if (statsPanel) statsPanel.SetActive(false);
 
         // enable the relevant panel based on the current state
         switch (state)
@@ -97,6 +100,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Controls:
                 if (controlsPanel) controlsPanel.SetActive(true);
+                break;
+            case GameState.Stats:
+                if (statsPanel) statsPanel.SetActive(true);
                 break;
         }
     }
@@ -149,6 +155,11 @@ public class GameManager : MonoBehaviour
     public void Controls()
     {
         ChangeState(GameState.Controls);
+    }
+    
+    public void Stats()
+    {
+        ChangeState(GameState.Stats);
     }
 
     void OnEnable()

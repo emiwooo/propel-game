@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 public class PlayerCotroller : MonoBehaviour
 {
-    private float xBound = 7.0f;
+    private float xBound = 7.0f; 
 
     public ParticleSystem confettiParticleSystem;
     private SpriteFlash spriteFlash;
@@ -39,7 +39,6 @@ public class PlayerCotroller : MonoBehaviour
     public float lineTracker = 0;
     public bool pizzazzPurchased = false;
 
-    private LineRenderer lineRenderer;
     public Ground groundControl;
     public Vector3 transTotal;
     public Vector2 mouseScreenPos;
@@ -61,7 +60,7 @@ public class PlayerCotroller : MonoBehaviour
     // gun
     public bool hasGun = false;
     public int maxAmmo = 5; // can be upgraded in shop
-    public int ammoCount = 3;
+    public int ammoCount = 0;
     public float shotTracker = 0;
 
     // boost
@@ -79,26 +78,23 @@ public class PlayerCotroller : MonoBehaviour
     // so player doesn't immediately die lol
     private bool gameStarted = false;
 
+    // STATS
+    public int ammoUsed = 0;
+    public int candyCollected = 0;
+    public int birdsKilled = 0;
+    public int planesKilled = 0;
+    public int deaths = 0;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.5f;
-        lineRenderer.endWidth = 0.5f;
-        lineRenderer.startColor = Color.purple;
-        lineRenderer.endColor = Color.purple;
-
         MoveAction.Enable();
         LookAction.Enable();
         ThrustAction.Enable();
         ShootAction.Enable();
-
-        lineRenderer.enabled = false;
-
         spriteFlash = GetComponent<SpriteFlash>();
-        
 
     }
 
@@ -201,6 +197,7 @@ public class PlayerCotroller : MonoBehaviour
 
             ammoCount -= 1;
             shotTracker = 1;
+            ammoUsed++;
         }
 
         if (mouseOn == 0)
@@ -232,6 +229,8 @@ public class PlayerCotroller : MonoBehaviour
 
     public void resetPlayerState()
     {
+        deaths++;
+
         gameStarted = false;
         thrustAllow = maxThrust;
         thrustTracker = 0;
@@ -319,6 +318,15 @@ public class PlayerCotroller : MonoBehaviour
         {
             confettiParticleSystem.Play();
         }
+    }
+
+    public String StatsDesc()
+    {
+        return "Ammo used: " + ammoUsed.ToString("F0")
+            + "\nCandy collected: " + candyCollected.ToString("F0")
+            + "\nBirds killed: " + birdsKilled.ToString("F0")
+            + "\nPlanes shot down: " + planesKilled.ToString("F0")
+            + "\nDeaths: " + deaths.ToString("F0");
     }
 
 

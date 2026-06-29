@@ -11,4 +11,10 @@ public class Plane : Enemy
     {
         base.Move();
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        player.planesKilled++;
+    }
 }

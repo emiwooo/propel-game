@@ -13,8 +13,8 @@ public class SmallCandy : CollectBehaviour
     {
         // Increase the player's thrust allowance by 1
         player.SmallCandyCollected();
-
         PlaySound(pickupSFX);
         Destroy(gameObject);
+        player.candyCollected++;
     }
 }
