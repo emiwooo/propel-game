@@ -11,30 +11,29 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Generation Settings")]
     [Tooltip("Vertical height of each generated band, in world units.")]
-    [SerializeField] private float bandHeight = 14f;
+    [SerializeField] private float bandHeight = 30f;
     [Tooltip("How far above the camera's current top edge to keep content generated.")]
     [SerializeField] private float lookAheadDistance = 15f;
     [Tooltip("How far below the camera's current bottom edge before old content is despawned.")]
-    [SerializeField] private float despawnBehindDistance = 10f;
+    [SerializeField] private float despawnBehindDistance = 50f;
 
     [Header("Enemy Spawn Settings")]
-    [SerializeField] private Vector2Int enemiesPerBand = new Vector2Int(0, 1);
+    [SerializeField] private Vector2Int enemiesPerBand = new Vector2Int(1, 3);
     [Tooltip("Extra horizontal margin kept clear past the enemy's patrol range, so it never touches the screen edge.")]
     [SerializeField] private float enemyEdgePadding = 0.5f;
-    [SerializeField] private float minEnemySpacing = 4f;
+    [SerializeField] private float minEnemySpacing = 20f;
 
     [Header("Cloud Spawn Settings")]
     [SerializeField] private Vector2Int cloudsPerBand = new Vector2Int(1, 2);
     [Tooltip("How far past the screen edge clouds are allowed to spawn.")]
     [SerializeField] private float cloudOverflow = 2f;
-    [SerializeField] private float minCloudSpacing = 3f;
+    [SerializeField] private float minCloudSpacing = 4f;
 
     [Header("Collectible Spawn Settings")]
     [SerializeField] private GameObject[] smallCandyPrefabs;
     [SerializeField] private GameObject[] bigCandyPrefabs;
     [SerializeField] private GameObject[] gunPrefabs;
     [SerializeField] private Vector2Int collectiblesPerBand = new Vector2Int(0, 1);
-    [Tooltip("Extra horizontal margin kept clear from the screen edge, like enemies (collectibles must be fully reachable).")]
     [SerializeField] private float collectibleEdgePadding = 0.5f;
     [SerializeField] private float minCollectibleSpacing = 3f;
     [Tooltip("Relative odds of each collectible type being chosen. They don't need to add up to any particular total.")]
@@ -44,7 +43,11 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Player Clear Zone")]
     [Tooltip("Nothing will spawn within this radius of the player's spawn point.")]
-    [SerializeField] private float playerSpawnClearRadius = 4f;
+    [SerializeField] private float playerSpawnClearRadius = 10f;
+
+    [Header("Difficulty Scaling")]
+    [SerializeField] private float enemiesPerHeightUnit = 0.05f;
+    [SerializeField] private float maxEnemiesCap = 8f;
 
     private float highestGeneratedY;
     private readonly List<SpawnedObject> spawnedObjects = new List<SpawnedObject>();
@@ -97,6 +100,11 @@ public class LevelGenerator : MonoBehaviour
 
         float startY = player != null ? player.transform.position.y : transform.position.y;
         highestGeneratedY = startY - bandHeight;
+        mainCamera.transform.position = new Vector3(
+            mainCamera.transform.position.x,
+            startY,
+            mainCamera.transform.position.z
+        );
         initialized = true;
 
         FillAheadOfCamera();
@@ -107,14 +115,16 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     private void FillAheadOfCamera()
     {
-        float camTop = GetCameraWorldBounds().max.y;
+        if (GameManager.Instance.CurrentState == GameManager.GameState.Playing) {
+            float camTop = GetCameraWorldBounds().max.y;
 
-        while (highestGeneratedY < camTop + lookAheadDistance)
-        {
-            float bandBottom = highestGeneratedY;
-            float bandTop = highestGeneratedY + bandHeight;
-            GenerateBand(bandBottom, bandTop);
-            highestGeneratedY = bandTop;
+            while (highestGeneratedY < camTop + lookAheadDistance)
+            {
+                float bandBottom = highestGeneratedY;
+                float bandTop = highestGeneratedY + bandHeight;
+                GenerateBand(bandBottom, bandTop);
+                highestGeneratedY = bandTop;
+            }
         }
     }
 
@@ -150,7 +160,10 @@ public class LevelGenerator : MonoBehaviour
         if (enemyPrefabs == null || enemyPrefabs.Length == 0) return;
 
         Bounds camBounds = GetCameraWorldBounds();
-        int count = Random.Range(enemiesPerBand.x, enemiesPerBand.y + 1);
+        //int count = Random.Range(enemiesPerBand.x, enemiesPerBand.y + 1);
+        float height = player != null ? player.currentMaxHeight : 0f;
+        int count = Mathf.RoundToInt(enemiesPerBand.x + (height * enemiesPerHeightUnit));
+        count = Mathf.Clamp(count, enemiesPerBand.x, Mathf.RoundToInt(maxEnemiesCap));
 
         for (int i = 0; i < count; i++)
         {

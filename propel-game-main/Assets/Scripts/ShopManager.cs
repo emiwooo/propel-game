@@ -27,6 +27,10 @@ public class ShopManager : MonoBehaviour
     public Dictionary<string, ShopItem> shopDatabase = new Dictionary<string, ShopItem>();
     public PlayerCotroller player;
 
+    public AudioSource shopAudioSource; 
+    public AudioClip successSFX;
+    public AudioClip failSFX;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -74,10 +78,19 @@ public class ShopManager : MonoBehaviour
                     }
                     
                     Debug.Log($"Purchased {itemName} for {price}. New level: {item.levelPurchased}");
+                    if (shopAudioSource != null && successSFX != null)
+                    {
+                        shopAudioSource.PlayOneShot(successSFX);
+                    }
+
                 }
                 else
                 {
                     Debug.Log($"Not enough money to purchase {itemName}");
+                    if (shopAudioSource != null && failSFX != null)
+                    {
+                        shopAudioSource.PlayOneShot(failSFX);
+                    }
                 }
             }
         }

@@ -25,7 +25,7 @@ public class PlayerCotroller : MonoBehaviour
     public InputAction LookAction;
     public InputAction ThrustAction;
     public InputAction ShootAction;
-    public float moveSpeed = 4f;
+    private float moveSpeed = 5f;
 
     // thrust
     public float thrustOn = 0f;
@@ -67,7 +67,7 @@ public class PlayerCotroller : MonoBehaviour
     public bool hasBoost = false;
     public float boostDuration = 1f; // 2 sec, can be upgraded
     private float boostTimer = 0f;
-    public float boostRegenRate = 20f; // i.e. 5 thurst per sec
+    private float boostRegenRate = 4f; // i.e. 10 thurst per sec
     
     
     // player falls faster the further they fall
@@ -277,7 +277,7 @@ public class PlayerCotroller : MonoBehaviour
 
     public void SmallCandyCollected()
     {
-        thrustAllow += smallCandyThrust * 2;
+        thrustAllow += smallCandyThrust;
         thrustAllow = Mathf.Min(thrustAllow, maxThrust); // Ensure thrust does not exceed maxThrust
     }
 
@@ -290,7 +290,7 @@ public class PlayerCotroller : MonoBehaviour
 
     public void ApplyShopUpgrades(ShopManager shop)
     {
-        maxThrust = 20 + (2 * shop.shopDatabase["Max Thrust"].levelPurchased);
+        maxThrust = 10 + (2 * shop.shopDatabase["Max Thrust"].levelPurchased);
 
         smallCandyThrust = 1 + shop.shopDatabase["Small Candy"].levelPurchased;
 

@@ -6,7 +6,6 @@ public class PriceDisplay : MonoBehaviour
     public ShopManager shopManager;
     public string targetItemName;
     [SerializeField] private TextMeshProUGUI priceText;
-    public AudioClip buttonSFX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,15 +45,6 @@ public class PriceDisplay : MonoBehaviour
     public void OnButtonClick()
     {
         shopManager.PurchaseItem(targetItemName);
-        PlaySound(buttonSFX);
         UpdatePriceText(); 
-    }
-
-    public void PlaySound(AudioClip clip)
-    {
-        if (clip != null)
-        {
-            AudioSource.PlayClipAtPoint(clip, transform.position);
-        }
     }
 }

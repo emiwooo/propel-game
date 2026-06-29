@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System.Diagnostics;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour
         Playing,
         Paused,
         GameOver,
-        Shop
+        Shop,
+        Controls
     }
     public GameState CurrentState { get; private set; }
     public float highestAltitude = 0;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject shopPanel;
+    [SerializeField] private GameObject controlsPanel;
 
     [Header("Player Stats")]
     public int money { get; set; } = 0;
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         if (pauseMenuPanel) pauseMenuPanel.SetActive(false);
         if (gameOverPanel) gameOverPanel.SetActive(false);
         if (shopPanel) shopPanel.SetActive(false);
+        if (controlsPanel) controlsPanel.SetActive(false);
 
         // enable the relevant panel based on the current state
         switch (state)
@@ -91,12 +95,17 @@ public class GameManager : MonoBehaviour
             case GameState.Shop:
                 if (shopPanel) shopPanel.SetActive(true);
                 break;
+            case GameState.Controls:
+                if (controlsPanel) controlsPanel.SetActive(true);
+                break;
         }
     }
 
 
     public void StartGame()
     {
+        UnityEngine.Debug.Log("resetting level");
+
         // need to reset state of player
         playerController.resetPlayerState();
         levelGenerator.ResetAndGenerate();
@@ -135,6 +144,11 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         ChangeState(GameState.MainMenu);
+    }
+
+    public void Controls()
+    {
+        ChangeState(GameState.Controls);
     }
 
     void OnEnable()

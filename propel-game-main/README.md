@@ -4,7 +4,7 @@ hiii welcome to propeller child game
 
 # scripts to implement!!!
 - [X] game manager - keep game state here
-- [ ] player controller
+- [X] player controller
 
 - [X] collectible (parent class for collectibles) 
 	- [X] small candy - to fill thrust meter
@@ -46,14 +46,13 @@ hiii welcome to propeller child game
 - [X] many more ui elements that i cannot think of yet
 
 # audio assets to ask nicely for
-- [ ] ask wife for music
+- [X] ask wife for music
 - [X] button sfx
 - [X] collect sfx small candy
 - [X] collect sfx big candy (powerup sound)
-- [ ] maybe enemy sfxs? as they load into the screen
-- [ ] bird damaged sfx
+- [X] bird damaged sfx
 - [ ] child damaged sfx
 - [X] propeller sfx (could just be a wind woosh)
 - [X] gun shoot sfx
 - [X] gun pickup sfx
-- [ ] panic sfx for when decreasing velocity is a certain number?
+- [ ] shop button sfx

@@ -19,12 +19,16 @@ public abstract class Enemy : MonoBehaviour
     [Header("Audio Clips")]
     [SerializeField] private AudioClip spawnSFX;
     [SerializeField] private AudioClip deathSFX;
-    [SerializeField] [Range(0f, 1f)] private float sfxVolume = 0.8f;
 
     protected virtual void Awake()
     {
         currentHealth = maxHealth;
         startX = transform.position.x;
+        direction = Random.value < 0.5f ? -1 : 1;
+        if (direction == -1)
+        {
+            FlipSprite();
+        }
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -84,7 +88,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (clip != null)
         {
-            AudioSource.PlayClipAtPoint(clip, transform.position, sfxVolume);
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         }
     }
 
